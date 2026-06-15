@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="popads-verification-3658333" value="dd5b680a50f2cb1654f979a955c69855" />
 <title>Arrows & Colors</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap');
@@ -11,6 +12,7 @@
   --text:#EAEDF6;--dim:#8A93B0;--danger:#FF4D6D;
   --c-orange:#FF6B35;--c-teal:#4ECDC4;--c-yellow:#FFD93D;--c-violet:#A06CD5;
   --c-green:#5FBE6B;--c-red:#E5534B;--c-pink:#F2789F;--c-navy:#3E5C9A;--c-brown:#A9744F;
+  --c-maroon:#8B1A2F;--c-seablue:#1B6CA8;--c-khaki:#7B6E4A;--c-cerulean:#2E8BC0;--c-aquamarine:#2EBFA5;
   --coin:#FFD700;--gem:#A06CD5;
   --theme-bg1:var(--bg);--theme-bg2:var(--panel);
 }
@@ -26,12 +28,24 @@ body.theme-sunset{--bg:#1F0D0D;--panel:#2A1515;}
 body.theme-ocean{--bg:#0D1A2A;--panel:#112233;}
 body.theme-candy{--bg:#1A0D1F;--panel:#261530;}
 
+/* -------- MAP BACKGROUND DECORATIONS -------- */
+/* Desert map deco */
+.desert-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;opacity:0;transition:opacity .5s}
+.desert-deco.visible{opacity:1}
+.desert-deco svg{position:absolute;bottom:0;left:0;width:100%;height:auto}
+/* Diamond map deco */
+.diamond-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;opacity:0;transition:opacity .5s}
+.diamond-deco.visible{opacity:1}
+.dmd-crystal{position:absolute;animation:crystalFloat 3s ease-in-out infinite}
+@keyframes crystalFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(5deg);}}
+
 /* -------- COLORS -------- */
 .col-orange{background:var(--c-orange)}.col-teal{background:var(--c-teal)}.col-yellow{background:var(--c-yellow)}.col-violet{background:var(--c-violet)}
 .col-green{background:var(--c-green)}.col-red{background:var(--c-red)}.col-pink{background:var(--c-pink)}.col-navy{background:var(--c-navy)}.col-brown{background:var(--c-brown)}
+.col-maroon{background:var(--c-maroon)}.col-seablue{background:var(--c-seablue)}.col-khaki{background:var(--c-khaki)}.col-cerulean{background:var(--c-cerulean)}.col-aquamarine{background:var(--c-aquamarine)}
 
 /* -------- MENU -------- */
-#menuScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px;gap:0;position:relative}
+#menuScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px;gap:0;position:relative;z-index:1}
 .menu-hero{width:132px;height:132px;position:relative;margin-bottom:28px}
 .hero-arrow{position:absolute;width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.35);animation:heroPulse 2.4s ease-in-out infinite}
 .hero-arrow svg{width:60%;height:60%}
@@ -53,19 +67,17 @@ body.theme-candy{--bg:#1A0D1F;--panel:#261530;}
 .mbtn .msub{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:11px;margin-top:2px;opacity:.72}
 .menu-note{margin-top:22px;color:var(--dim);font-size:11px}
 .menu-coin-badge{position:absolute;top:14px;right:14px;background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.35);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px;color:var(--coin)}
-.map-btn{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.map-btn{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
 .map-btn svg{width:18px;height:18px}
 .map-btn:active{transform:scale(.94)}
-/* menu bottom icons */
-.menu-bottom-icons{position:absolute;bottom:20px;display:flex;gap:14px;align-items:center}
+.menu-bottom-icons{position:absolute;bottom:20px;display:flex;gap:14px;align-items:center;z-index:2}
 .menu-icon-btn{width:44px;height:44px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s}
 .menu-icon-btn:active{transform:scale(.92)}
 .menu-icon-btn svg{width:20px;height:20px}
-/* gem badge */
 .gem-badge{position:absolute;top:58px;right:14px;background:rgba(160,108,213,.15);border:1px solid rgba(160,108,213,.35);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px;color:var(--gem)}
 
 /* -------- MAP SCREEN -------- */
-#mapScreen{height:100%;width:100%;display:flex;flex-direction:column}
+#mapScreen{height:100%;width:100%;display:flex;flex-direction:column;position:relative;z-index:1}
 .map-header{display:flex;align-items:center;gap:12px;padding:14px 4px 10px;width:100%}
 .map-header h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;flex:1}
 .map-tabs{display:flex;gap:8px;padding:0 4px 14px;width:100%;overflow-x:auto;scrollbar-width:none}
@@ -89,7 +101,7 @@ body.theme-candy{--bg:#1A0D1F;--panel:#261530;}
 .map-coin-bar strong{color:var(--coin);font-family:'Space Grotesk',sans-serif}
 
 /* -------- GAME SCREEN -------- */
-#gameScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+#gameScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:relative;z-index:1}
 header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:6px 4px 8px}
 .hdr-left{display:flex;align-items:center;gap:10px}
 .back-btn{width:38px;height:38px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
@@ -118,10 +130,8 @@ header{width:100%;display:flex;align-items:center;justify-content:space-between;
 .cell{background:rgba(255,255,255,.03);border-radius:6px;position:relative;display:flex;align-items:center;justify-content:center}
 .cell.empty{background:rgba(255,255,255,.015)}
 
-/* skin modifiers */
+/* skin modifiers — diamond skin removed */
 .arrow.skin-round{border-radius:50%!important}
-.arrow.skin-diamond{border-radius:4px!important;transform:rotate(45deg)}
-.arrow.skin-diamond svg{transform:rotate(-45deg)}
 .arrow.skin-glow{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 12px currentColor,0 0 20px currentColor!important}
 
 /* gates */
@@ -143,6 +153,7 @@ header{width:100%;display:flex;align-items:center;justify-content:space-between;
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .arrow.flash{box-shadow:0 0 0 4px rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,0,0,.18)}
 .arrow.col-green{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.25),0 0 0 2px rgba(95,190,107,.4)}
+.arrow.col-cerulean{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.25),0 0 0 2px rgba(46,139,192,.6),0 0 14px rgba(46,139,192,.4)}
 .special-badge{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
 .special-badge svg{width:12px;height:12px;pointer-events:none}
 .special-badge.used{opacity:.3;cursor:default}
@@ -156,6 +167,10 @@ header{width:100%;display:flex;align-items:center;justify-content:space-between;
 .green-bar{display:flex;gap:4px}
 .green-pip{width:8px;height:8px;border-radius:50%;background:var(--c-green);transition:opacity .2s}
 .green-pip.used{opacity:.2}
+
+/* Cerulean coin boost notif */
+.cerulean-boost-notif{position:absolute;background:rgba(46,139,192,.9);border:1px solid rgba(46,139,192,.6);border-radius:10px;padding:4px 10px;font-size:11px;font-weight:700;color:#fff;z-index:20;pointer-events:none;animation:boostPop .7s ease forwards;white-space:nowrap}
+@keyframes boostPop{0%{opacity:0;transform:translateY(0) scale(.8)}30%{opacity:1;transform:translateY(-10px) scale(1)}80%{opacity:1;transform:translateY(-20px)}100%{opacity:0;transform:translateY(-30px)}}
 
 /* footer */
 footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
@@ -178,22 +193,8 @@ footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
 .coin-reward{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.25);border-radius:12px;padding:6px 14px;margin-bottom:8px;font-size:13px;color:var(--coin);font-weight:700}
 .gem-reward{display:inline-flex;align-items:center;gap:6px;background:rgba(160,108,213,.12);border:1px solid rgba(160,108,213,.25);border-radius:12px;padding:6px 14px;margin-bottom:14px;font-size:13px;color:var(--gem);font-weight:700}
 
-/* -------- AD OVERLAY -------- */
-#adOverlay{position:fixed;inset:0;background:rgba(5,7,15,.95);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
-#adOverlay.show{opacity:1;pointer-events:all}
-.ad-modal{background:var(--panel);border-radius:22px;padding:24px;text-align:center;width:min(320px,86vw);border:1px solid var(--line)}
-.ad-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-.ad-banner{width:100%;height:120px;background:linear-gradient(135deg,#1a2a4a,#2a1a3a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:28px;position:relative;overflow:hidden}
-.ad-banner-text{font-family:'Space Grotesk',sans-serif;font-size:16px;color:rgba(255,255,255,.6)}
-.ad-timer{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--c-teal);margin-bottom:8px}
-.ad-desc{color:var(--dim);font-size:12px;margin-bottom:16px}
-.ad-skip{font-size:12px;color:var(--dim);cursor:pointer;text-decoration:underline;display:none}
-.ad-skip.visible{display:block}
-/* rewarded ad */
-.ad-reward-badge{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:8px 16px;font-size:14px;color:var(--coin);font-weight:700;margin-bottom:12px}
-
 /* -------- SHOP SCREEN -------- */
-#shopScreen{height:100%;width:100%;display:flex;flex-direction:column}
+#shopScreen{height:100%;width:100%;display:flex;flex-direction:column;position:relative;z-index:1}
 .shop-header{display:flex;align-items:center;gap:12px;padding:14px 4px 10px;width:100%}
 .shop-header h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;flex:1}
 .shop-gem-bar{display:flex;align-items:center;gap:6px;background:rgba(160,108,213,.12);border:1px solid rgba(160,108,213,.3);border-radius:14px;padding:6px 12px;font-size:14px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--gem)}
@@ -214,7 +215,6 @@ footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
 .shop-item .item-price.free{background:rgba(78,205,196,.12);border-color:rgba(78,205,196,.25);color:var(--c-teal)}
 .shop-item .owned-badge{position:absolute;top:8px;right:8px;background:rgba(78,205,196,.2);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--c-teal)}
 .shop-item .active-badge{position:absolute;top:8px;right:8px;background:rgba(78,205,196,.35);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--c-teal)}
-/* preview for bg themes */
 .theme-preview{width:100%;height:36px;border-radius:8px;margin-bottom:10px;display:flex;gap:4px;align-items:center;justify-content:center;overflow:hidden}
 
 /* -------- TUTORIAL -------- */
@@ -238,12 +238,51 @@ footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
 
 /* -------- SOUND TOGGLE -------- */
 .sound-btn-icon{font-size:16px}
-/* floating gem earn notif */
 @keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-60px)}}
 .float-notif{position:fixed;pointer-events:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--gem);animation:floatUp .9s ease forwards;z-index:200;text-shadow:0 2px 8px rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
+
+<!-- Desert background deco -->
+<div class="desert-deco" id="desertDeco">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" preserveAspectRatio="xMidYMax meet">
+  <!-- Sand dunes -->
+  <ellipse cx="60" cy="290" rx="120" ry="40" fill="#8B6914" opacity=".18"/>
+  <ellipse cx="280" cy="295" rx="180" ry="35" fill="#A07820" opacity=".15"/>
+  <ellipse cx="440" cy="288" rx="100" ry="30" fill="#8B6914" opacity=".12"/>
+  <!-- Cacti -->
+  <g opacity=".35">
+    <!-- Cactus 1 -->
+    <rect x="30" y="220" width="10" height="55" rx="5" fill="#3a7d44"/>
+    <rect x="15" y="235" width="28" height="8" rx="4" fill="#3a7d44"/>
+    <rect x="7" y="218" width="8" height="28" rx="4" fill="#3a7d44"/>
+    <rect x="42" y="225" width="8" height="22" rx="4" fill="#3a7d44"/>
+    <rect x="50" y="215" width="8" height="20" rx="4" fill="#3a7d44"/>
+    <!-- Cactus 2 -->
+    <rect x="390" y="230" width="12" height="48" rx="6" fill="#2d6e3a"/>
+    <rect x="374" y="242" width="32" height="9" rx="4" fill="#2d6e3a"/>
+    <rect x="366" y="225" width="9" height="30" rx="4" fill="#2d6e3a"/>
+    <rect x="402" y="234" width="9" height="24" rx="4" fill="#2d6e3a"/>
+    <!-- Cactus 3 small -->
+    <rect x="200" y="255" width="8" height="35" rx="4" fill="#3a7d44"/>
+    <rect x="190" y="265" width="22" height="7" rx="3" fill="#3a7d44"/>
+    <rect x="183" y="252" width="7" height="20" rx="3" fill="#3a7d44"/>
+  </g>
+  <!-- Sand dots/pebbles -->
+  <circle cx="110" cy="278" r="3" fill="#c8a444" opacity=".2"/>
+  <circle cx="310" cy="282" r="2" fill="#c8a444" opacity=".18"/>
+  <circle cx="420" cy="275" r="2.5" fill="#c8a444" opacity=".15"/>
+  <circle cx="160" cy="285" r="2" fill="#c8a444" opacity=".2"/>
+  <circle cx="350" cy="270" r="3" fill="#c8a444" opacity=".12"/>
+</svg>
+</div>
+
+<!-- Diamond Havuzları background deco -->
+<div class="diamond-deco" id="diamondDeco">
+  <!-- Crystals positioned absolutely via JS or inline -->
+</div>
+
 <div id="app">
 
 <!-- ===== MENU ===== -->
@@ -361,28 +400,12 @@ footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
   </div>
 </div>
 
-<!-- ===== AD OVERLAY ===== -->
-<div id="adOverlay">
-  <div class="ad-modal" id="adModal">
-    <div class="ad-label">Reklam</div>
-    <div class="ad-banner" id="adBanner">
-      <span class="ad-banner-text" id="adBannerText">🎮 Reklam Alanı</span>
-    </div>
-    <div id="adRewardBadge" class="ad-reward-badge" style="display:none">⭐ +3 Coin kazanacaksın!</div>
-    <div class="ad-timer" id="adTimer">5</div>
-    <div class="ad-desc" id="adDesc">Reklam izleniyor...</div>
-    <div class="ad-skip" id="adSkip">Geç →</div>
-    <div class="mbtn secondary" id="adWatchMore" style="display:none;margin-top:8px;font-size:13px">Reklam izle → +3 Coin</div>
-  </div>
-</div>
-
 <script>
 // ================================================================
-//  ARROWS & COLORS — Enhanced Edition
-//  + Sound, Music, Ads, Shop, Security, Gems
+//  ARROWS & COLORS — Enhanced Edition v2
 // ================================================================
 
-// -------- SECURITY (anti-tamper) --------
+// -------- SECURITY --------
 const SEC = {
   key: 'aac_integrity',
   fields: ['aac_coins','aac_coinset','aac_done','aac_gems'],
@@ -397,37 +420,30 @@ const SEC = {
   },
   verify() {
     const stored = localStorage.getItem(this.key);
-    if (!stored) return true; // first run
+    if (!stored) return true;
     return stored === this.build();
   },
-  save() {
-    localStorage.setItem(this.key, this.build());
-  }
+  save() { localStorage.setItem(this.key, this.build()); }
 };
-
-// Check on load — if tampered, reset
 (function() {
   try {
     if (!SEC.verify()) {
-      console.warn('[AC] Save data integrity check failed. Resetting.');
       ['aac_coins','aac_coinset','aac_done','aac_gems','aac_level','aac_integrity'].forEach(k => localStorage.removeItem(k));
     }
   } catch(e) {}
 })();
 
-// -------- SOUND ENGINE (Web Audio API) --------
+// -------- SOUND ENGINE --------
 const Sound = (() => {
   let ctx = null;
   let enabled = localStorage.getItem('aac_sound') !== '0';
   let musicEnabled = localStorage.getItem('aac_music') !== '0';
   let musicNode = null, musicGain = null;
-
   function getCtx() {
     if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
     if (ctx.state === 'suspended') ctx.resume();
     return ctx;
   }
-
   function playTone(freq, type, dur, vol, delay=0) {
     if (!enabled) return;
     try {
@@ -444,7 +460,6 @@ const Sound = (() => {
       osc.stop(c.currentTime + delay + dur + 0.01);
     } catch(e) {}
   }
-
   function playNoise(dur, vol=0.08) {
     if (!enabled) return;
     try {
@@ -460,7 +475,6 @@ const Sound = (() => {
       src.start();
     } catch(e) {}
   }
-
   return {
     get enabled() { return enabled; },
     get musicEnabled() { return musicEnabled; },
@@ -468,76 +482,40 @@ const Sound = (() => {
     toggleMusic() {
       musicEnabled = !musicEnabled;
       localStorage.setItem('aac_music', musicEnabled?'1':'0');
-      if (musicEnabled) this.startMusic();
-      else this.stopMusic();
+      if (musicEnabled) this.startMusic(); else this.stopMusic();
     },
-    // SFX presets
     click() { playTone(440,'sine',0.08,0.15); },
-    arrowSlide() {
-      playTone(380,'sine',0.06,0.12);
-      playTone(480,'sine',0.08,0.1,0.05);
-    },
+    arrowSlide() { playTone(380,'sine',0.06,0.12); playTone(480,'sine',0.08,0.1,0.05); },
     success() {
-      playTone(523,'sine',0.1,0.2);
-      playTone(659,'sine',0.1,0.2,0.1);
-      playTone(784,'sine',0.15,0.2,0.2);
-      playTone(1047,'sine',0.12,0.15,0.35);
+      playTone(523,'sine',0.1,0.2); playTone(659,'sine',0.1,0.2,0.1);
+      playTone(784,'sine',0.15,0.2,0.2); playTone(1047,'sine',0.12,0.15,0.35);
     },
-    fail() {
-      playTone(300,'sawtooth',0.08,0.2);
-      playTone(220,'sawtooth',0.12,0.18,0.1);
-      playNoise(0.15, 0.05);
+    fail() { playTone(300,'sawtooth',0.08,0.2); playTone(220,'sawtooth',0.12,0.18,0.1); playNoise(0.15,0.05); },
+    heartLose() { playTone(200,'sawtooth',0.06,0.15); playNoise(0.08,0.04); },
+    coin() { playTone(880,'sine',0.07,0.2); playTone(1100,'sine',0.09,0.18,0.07); playTone(1320,'sine',0.08,0.15,0.15); },
+    hint() { playTone(600,'sine',0.05,0.12); playTone(800,'sine',0.07,0.1,0.06); },
+    purchase() { playTone(440,'sine',0.06,0.15); playTone(554,'sine',0.08,0.15,0.08); playTone(659,'sine',0.1,0.15,0.16); },
+    gemEarn() { playTone(700,'sine',0.06,0.15); playTone(900,'triangle',0.08,0.12,0.07); },
+    ceruleanBoost() {
+      playTone(1000,'sine',0.05,0.18); playTone(1200,'sine',0.07,0.16,0.06); playTone(1400,'sine',0.09,0.14,0.13);
     },
-    heartLose() {
-      playTone(200,'sawtooth',0.06,0.15);
-      playNoise(0.08, 0.04);
-    },
-    coin() {
-      playTone(880,'sine',0.07,0.2);
-      playTone(1100,'sine',0.09,0.18,0.07);
-      playTone(1320,'sine',0.08,0.15,0.15);
-    },
-    hint() {
-      playTone(600,'sine',0.05,0.12);
-      playTone(800,'sine',0.07,0.1,0.06);
-    },
-    purchase() {
-      playTone(440,'sine',0.06,0.15);
-      playTone(554,'sine',0.08,0.15,0.08);
-      playTone(659,'sine',0.1,0.15,0.16);
-    },
-    gemEarn() {
-      playTone(700,'sine',0.06,0.15);
-      playTone(900,'triangle',0.08,0.12,0.07);
-    },
-    // Background music (simple procedural)
     startMusic() {
       if (!musicEnabled) return;
       this.stopMusic();
       try {
         const c = getCtx();
-        musicGain = c.createGain();
-        musicGain.gain.value = 0.04;
-        musicGain.connect(c.destination);
-
+        musicGain = c.createGain(); musicGain.gain.value = 0.04; musicGain.connect(c.destination);
         const notes = [261,294,330,349,392,440,494,523];
         const pattern = [0,2,4,5,7,7,5,4,2,0,0,2,4,7,5,4];
-        let step = 0;
-        const tempo = 0.42;
-
+        let step = 0; const tempo = 0.42;
         const playStep = () => {
           if (!musicEnabled || !musicGain) return;
           const note = notes[pattern[step % pattern.length]];
-          const osc = c.createOscillator();
-          const g = c.createGain();
-          osc.connect(g); g.connect(musicGain);
-          osc.type = 'triangle';
-          osc.frequency.value = note;
-          g.gain.setValueAtTime(0, c.currentTime);
-          g.gain.linearRampToValueAtTime(0.6, c.currentTime + 0.02);
+          const osc = c.createOscillator(); const g = c.createGain();
+          osc.connect(g); g.connect(musicGain); osc.type = 'triangle'; osc.frequency.value = note;
+          g.gain.setValueAtTime(0, c.currentTime); g.gain.linearRampToValueAtTime(0.6, c.currentTime + 0.02);
           g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + tempo * 0.7);
-          osc.start(); osc.stop(c.currentTime + tempo);
-          step++;
+          osc.start(); osc.stop(c.currentTime + tempo); step++;
           musicNode = setTimeout(playStep, tempo * 1000);
         };
         playStep();
@@ -552,37 +530,38 @@ const Sound = (() => {
 
 // -------- COLOR DEFS --------
 const COLOR_HEX = {
-  orange:'#FF6B35',teal:'#4ECDC4',yellow:'#FFD93D',violet:'#A06CD5',
-  green:'#5FBE6B',red:'#E5534B',pink:'#F2789F',navy:'#3E5C9A',brown:'#A9744F'
+  orange:'#FF6B35', teal:'#4ECDC4', yellow:'#FFD93D', violet:'#A06CD5',
+  green:'#5FBE6B', red:'#E5534B', pink:'#F2789F', navy:'#3E5C9A', brown:'#A9744F',
+  maroon:'#8B1A2F', seablue:'#1B6CA8', khaki:'#7B6E4A', cerulean:'#2E8BC0', aquamarine:'#2EBFA5'
 };
 
 // -------- MAPS --------
 const MAPS = [
-  {id:'start', name:'Başlangıç Renkler', colors:['orange','teal','yellow','violet'], levelStart:1, levelEnd:40},
-  {id:'desert', name:'Çöl Yolu', colors:['green','red','pink','navy','brown'], levelStart:41, levelEnd:80}
+  {id:'start',    name:'Başlangıç Renkler', colors:['orange','teal','yellow','violet'],                          levelStart:1,   levelEnd:40},
+  {id:'desert',   name:'Çöl Yolu',          colors:['green','red','pink','navy','brown'],                        levelStart:41,  levelEnd:80},
+  {id:'diamond',  name:'Elmas Havuzları',   colors:['maroon','seablue','khaki','cerulean','aquamarine'],         levelStart:81,  levelEnd:120}
 ];
 function getMap(level){ return MAPS.find(m=>level>=m.levelStart&&level<=m.levelEnd)||MAPS[0]; }
 
-// -------- SHOP DATA --------
+// -------- SHOP DATA (diamond skin removed) --------
 const SHOP_ITEMS = {
   themes: [
     {id:'default', name:'Varsayılan', desc:'Klasik koyu tema', icon:'🌑', price:0, preview:['#161A26','#20263A']},
-    {id:'cosmos', name:'Kozmos', desc:'Derin uzay hissi', icon:'🌌', price:150, preview:['#0D0D1A','#1A1A2E']},
-    {id:'forest', name:'Orman', desc:'Yeşil doğa temaları', icon:'🌿', price:200, preview:['#0D1F0D','#152615']},
-    {id:'sunset', name:'Gün Batımı', desc:'Sıcak turuncu tonlar', icon:'🌅', price:250, preview:['#1F0D0D','#2A1515']},
-    {id:'ocean', name:'Okyanus', desc:'Derin mavi derinlik', icon:'🌊', price:300, preview:['#0D1A2A','#112233']},
-    {id:'candy', name:'Şeker', desc:'Renkli tatlı dünya', icon:'🍬', price:350, preview:['#1A0D1F','#261530']},
+    {id:'cosmos',  name:'Kozmos',     desc:'Derin uzay hissi',  icon:'🌌', price:150, preview:['#0D0D1A','#1A1A2E']},
+    {id:'forest',  name:'Orman',      desc:'Yeşil doğa temaları',icon:'🌿', price:200, preview:['#0D1F0D','#152615']},
+    {id:'sunset',  name:'Gün Batımı', desc:'Sıcak turuncu tonlar',icon:'🌅', price:250, preview:['#1F0D0D','#2A1515']},
+    {id:'ocean',   name:'Okyanus',    desc:'Derin mavi derinlik', icon:'🌊', price:300, preview:['#0D1A2A','#112233']},
+    {id:'candy',   name:'Şeker',      desc:'Renkli tatlı dünya',  icon:'🍬', price:350, preview:['#1A0D1F','#261530']},
   ],
   skins: [
-    {id:'default', name:'Normal', desc:'Klasik ok görünümü', icon:'➡️', price:0},
-    {id:'round', name:'Yuvarlak', desc:'Daire şekilli oklar', icon:'⭕', price:100},
-    {id:'diamond', name:'Elmas', desc:'Dörtgen döndürülmüş', icon:'💠', price:200},
-    {id:'glow', name:'Işıl Işıl', desc:'Parlak ışık efekti', icon:'✨', price:300},
+    {id:'default', name:'Normal',     desc:'Klasik ok görünümü',  icon:'➡️', price:0},
+    {id:'round',   name:'Yuvarlak',   desc:'Daire şekilli oklar', icon:'⭕', price:100},
+    {id:'glow',    name:'Işıl Işıl',  desc:'Parlak ışık efekti',  icon:'✨', price:300},
   ],
   boosts: [
-    {id:'extra_heart', name:'+1 Can', desc:'Bu seviye için ekstra can', icon:'❤️', price:75, consumable:true},
-    {id:'coin_magnet', name:'Coin Mıknatıs', desc:'Sonraki 5 seviye otomatik coin', icon:'🧲', price:200, consumable:true},
-    {id:'hint_pack', name:'İpucu Paketi', desc:'5 ücretsiz ipucu hakkı', icon:'💡', price:150, consumable:true},
+    {id:'extra_heart', name:'+1 Can',        desc:'Bu seviye için ekstra can',        icon:'❤️', price:75,  consumable:true},
+    {id:'coin_magnet', name:'Coin Mıknatıs', desc:'Sonraki 5 seviye otomatik coin',   icon:'🧲', price:200, consumable:true},
+    {id:'hint_pack',   name:'İpucu Paketi',  desc:'5 ücretsiz ipucu hakkı',           icon:'💡', price:150, consumable:true},
   ]
 };
 
@@ -595,10 +574,7 @@ function densityForLIM(lim){ return Math.min(0.62+lim*0.012,0.85); }
 function inBounds(x,y,s){ return x>=0&&y>=0&&x<s&&y<s; }
 
 // -------- RNG --------
-function makeRng(seed){
-  let s=seed;
-  return()=>{ s=(s*9301+49297)%233280; return s/233280; };
-}
+function makeRng(seed){ let s=seed; return()=>{ s=(s*9301+49297)%233280; return s/233280; }; }
 function shuffle(a,rng){ for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];} }
 
 // -------- LEVEL GENERATION --------
@@ -611,14 +587,11 @@ function generateLevel(level){
   const rng = makeRng(level*7919+13);
   const density = densityForLIM(lim);
   const num = Math.floor(size*size*density);
-
   let positions=[];
   for(let y=0;y<size;y++)for(let x=0;x<size;x++)positions.push({x,y});
   shuffle(positions,rng);
   const chosen=positions.slice(0,num);
-
   const present=new Set(), placed={}, gateMap={};
-
   for(let k=chosen.length-1;k>=0;k--){
     const {x,y}=chosen[k];
     let dirs=[0,1,2,3]; shuffle(dirs,rng);
@@ -647,10 +620,8 @@ function generateLevel(level){
     if(!gateMap[gk])gateMap[gk]=new Set();
     gateMap[gk].add(ccol);
   }
-
   const cells=Array.from({length:size},()=>Array(size).fill(null));
   for(const k in placed){const[x,y]=k.split(',').map(Number);cells[y][x]=placed[k];}
-
   const gates={};
   const paths={};
   for(let y=0;y<size;y++)for(let x=0;x<size;x++){
@@ -663,7 +634,6 @@ function generateLevel(level){
     if(!gates[k])gates[k]=new Set();
     gates[k].add(cell.color);
   }
-
   let coin=null;
   let empties=[];
   for(const k in paths)for(const p of paths[k])if(!cells[p.y][p.x])empties.push(p);
@@ -672,15 +642,14 @@ function generateLevel(level){
     let starts=[];for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(cells[y][x])starts.push({x,y});
     if(starts.length){shuffle(starts,rng);coin=starts[0];}
   }
-
   return{size,cells,gates,palette,coin,map};
 }
 
 // -------- SAVE / LOAD --------
 const SK={
-  level:'aac_level',coins:'aac_coins',coinSet:'aac_coinset',done:'aac_done',tutDone:'aac_tut',
-  gems:'aac_gems',owned:'aac_owned',activeTheme:'aac_theme',activeSkin:'aac_skin',
-  hintPack:'aac_hints',coinMagnet:'aac_magnet',
+  level:'aac_level', coins:'aac_coins', coinSet:'aac_coinset', done:'aac_done', tutDone:'aac_tut',
+  gems:'aac_gems', owned:'aac_owned', activeTheme:'aac_theme', activeSkin:'aac_skin',
+  hintPack:'aac_hints', coinMagnet:'aac_magnet',
 };
 function lsGet(k){try{return localStorage.getItem(k);}catch{return null;}}
 function lsSet(k,v){try{localStorage.setItem(k,String(v));SEC.save();}catch{}}
@@ -697,18 +666,15 @@ function markCoinCollected(level){
 function markLevelDone(level){const s=getDoneSet();s.add(level);lsSet(SK.done,JSON.stringify([...s]));}
 function isTutDone(){return lsGet(SK.tutDone)==='1';}
 function setTutDone(){lsSet(SK.tutDone,'1');}
-// Gems (Renk Parası)
 function getGems(){return parseInt(lsGet(SK.gems)||'0');}
 function addGems(n){lsSet(SK.gems,getGems()+n);}
 function spendGems(n){const g=getGems();if(g<n)return false;lsSet(SK.gems,g-n);return true;}
-// Owned shop items
 function getOwned(){try{return new Set(JSON.parse(lsGet(SK.owned)||'["default"]'));}catch{return new Set(['default']);}}
 function addOwned(id){const s=getOwned();s.add(id);lsSet(SK.owned,JSON.stringify([...s]));}
 function getActiveTheme(){return lsGet(SK.activeTheme)||'default';}
 function setActiveTheme(id){lsSet(SK.activeTheme,id);applyTheme(id);}
 function getActiveSkin(){return lsGet(SK.activeSkin)||'default';}
 function setActiveSkin(id){lsSet(SK.activeSkin,id);}
-// Boosts
 function getHintPack(){return parseInt(lsGet(SK.hintPack)||'0');}
 function addHintPack(n){lsSet(SK.hintPack,getHintPack()+n);}
 function useHint(){const h=getHintPack();if(h>0){lsSet(SK.hintPack,h-1);return true;}return false;}
@@ -720,76 +686,52 @@ function applyTheme(id){
   document.body.className = id==='default'?'': `theme-${id}`;
 }
 
-// -------- AD SYSTEM --------
-const Ads = (() => {
-  let adCallback = null;
-  let adTimer = null;
-  let isRewarded = false;
-  const adOverlay = document.getElementById('adOverlay');
-  const adTimerEl = document.getElementById('adTimer');
-  const adSkip = document.getElementById('adSkip');
-  const adDesc = document.getElementById('adDesc');
-  const adRewardBadge = document.getElementById('adRewardBadge');
-  const adBannerText = document.getElementById('adBannerText');
-  const adWatchMore = document.getElementById('adWatchMore');
+// -------- MAP BACKGROUND DECOS --------
+function updateMapDecos(mapId) {
+  const desertDeco = document.getElementById('desertDeco');
+  const diamondDeco = document.getElementById('diamondDeco');
+  desertDeco.classList.toggle('visible', mapId === 'desert');
+  diamondDeco.classList.toggle('visible', mapId === 'diamond');
+}
 
-  const AD_COPY = [
-    {emoji:'🎮', text:'Yeni Oyunlar Her Gün'},
-    {emoji:'🏆', text:'Turnuvaya Katıl!'},
-    {emoji:'💫', text:'Özel Teklif: Premium'},
-    {emoji:'🎯', text:'Zeka Oyunları Dünyası'},
-    {emoji:'🌟', text:'Top Oyuncu Ol!'},
+// Build diamond crystals deco
+(function buildDiamondDeco(){
+  const deco = document.getElementById('diamondDeco');
+  const crystals = [
+    {left:5,  bottom:15, size:40, color:'#1B6CA8', delay:0},
+    {left:15, bottom:5,  size:28, color:'#2EBFA5', delay:.4},
+    {left:60, bottom:8,  size:36, color:'#8B1A2F', delay:.8},
+    {left:75, bottom:18, size:24, color:'#2E8BC0', delay:.2},
+    {left:85, bottom:5,  size:44, color:'#1B6CA8', delay:1.1},
+    {left:40, bottom:12, size:20, color:'#2EBFA5', delay:.6},
+    {left:50, bottom:3,  size:32, color:'#7B6E4A', delay:.9},
+    {left:25, bottom:20, size:18, color:'#2E8BC0', delay:.3},
+    {left:90, bottom:22, size:30, color:'#2EBFA5', delay:.7},
   ];
-
-  function showAd(rewarded, onComplete) {
-    isRewarded = rewarded;
-    adCallback = onComplete;
-    const ad = AD_COPY[Math.floor(Math.random()*AD_COPY.length)];
-    adBannerText.textContent = `${ad.emoji} ${ad.text}`;
-    adRewardBadge.style.display = rewarded ? 'block' : 'none';
-    adSkip.classList.remove('visible');
-    adWatchMore.style.display = 'none';
-    adDesc.textContent = rewarded ? 'Reklam izleyerek coin kazan!' : 'Kısa reklam arası...';
-
-    let t = rewarded ? 10 : 5;
-    adTimerEl.textContent = t;
-    adOverlay.classList.add('show');
-
-    adTimer = setInterval(() => {
-      t--;
-      adTimerEl.textContent = t;
-      if (t <= 3) adSkip.classList.add('visible');
-      if (t <= 0) {
-        clearInterval(adTimer);
-        finish();
-      }
-    }, 1000);
-  }
-
-  function finish() {
-    clearInterval(adTimer);
-    adOverlay.classList.remove('show');
-    if (adCallback) { adCallback(isRewarded); adCallback = null; }
-  }
-
-  adSkip.addEventListener('click', finish);
-
-  return {
-    showInterstitial(onDone) { showAd(false, onDone); },
-    showRewarded(onDone) { showAd(true, onDone); }
-  };
+  crystals.forEach(c=>{
+    const el = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    el.setAttribute('viewBox','0 0 40 60');
+    el.setAttribute('width', c.size+'px');
+    el.setAttribute('height', (c.size*1.5)+'px');
+    el.style.cssText=`position:absolute;left:${c.left}%;bottom:${c.bottom}px;animation:crystalFloat ${2.5+c.delay}s ease-in-out infinite;animation-delay:${c.delay}s;opacity:.3;`;
+    el.innerHTML=`
+      <polygon points="20,0 35,18 20,60 5,18" fill="${c.color}" opacity=".7"/>
+      <polygon points="20,0 35,18 20,30 5,18" fill="white" opacity=".15"/>
+      <polygon points="20,30 35,18 20,60" fill="${c.color}" opacity=".4"/>
+      <line x1="20" y1="0" x2="20" y2="60" stroke="white" stroke-width=".5" opacity=".2"/>
+    `;
+    deco.appendChild(el);
+  });
 })();
 
 // -------- STATE --------
 let state={
-  level:1,map:MAPS[0],size:4,cells:[],gates:{},palette:[],
-  hearts:3,maxHearts:3,busy:false,solved:false,
-  coin:null,coinCollected:false,
-  recolorUsed:false,greenUsesLeft:2
+  level:1, map:MAPS[0], size:4, cells:[], gates:{}, palette:[],
+  hearts:3, maxHearts:3, busy:false, solved:false,
+  coin:null, coinCollected:false,
+  recolorUsed:false, greenUsesLeft:2,
+  ceruleanBoostEarned:0 // tracks RP earned from cerulean boosts this level
 };
-
-// Track for ads: level counter since last interstitial
-let levelsSinceAd = 0;
 
 // -------- DOM --------
 const menuScreen=document.getElementById('menuScreen');
@@ -828,6 +770,7 @@ function showGemFloat(amount, el) {
 function showMenu(){
   [mapScreen,gameScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
   menuScreen.classList.remove('hidden');
+  updateMapDecos(null);
   updateMenuCoins();
   const saved=getSavedLevel();
   const contBtn=document.getElementById('continueBtn');
@@ -845,23 +788,21 @@ function updateMenuCoins(){
 function showMapScreen(mapId){
   [menuScreen,gameScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
   mapScreen.classList.remove('hidden');
+  updateMapDecos(mapId);
   renderMapScreen(mapId||'start');
 }
 function showShopScreen(){
   [menuScreen,gameScreen,mapScreen].forEach(s=>s.classList.add('hidden'));
   shopScreen.classList.remove('hidden');
+  updateMapDecos(null);
   renderShopScreen('themes');
 }
 function showGame(level){
   [menuScreen,mapScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
   gameScreen.classList.remove('hidden');
-  // Check if interstitial needed (every 5 levels, not on level 1)
-  if(level>1 && levelsSinceAd>=5){
-    levelsSinceAd=0;
-    Ads.showInterstitial(()=>startLevel(level));
-  } else {
-    startLevel(level);
-  }
+  const m = getMap(level);
+  updateMapDecos(m.id);
+  startLevel(level);
 }
 
 document.getElementById('mapBtn').addEventListener('click',()=>{Sound.click();showMapScreen('start');});
@@ -882,19 +823,14 @@ document.getElementById('backBtn').addEventListener('click',()=>{Sound.click();s
 document.getElementById('hintBtn').addEventListener('click',showHint);
 document.getElementById('restartBtn').addEventListener('click',()=>{Sound.click();startLevel(state.level);});
 
-// Sound & Music toggles
 function updateSoundIcons(){
   const sIcon = document.getElementById('soundIcon');
   const mIcon = document.getElementById('musicIcon');
   sIcon.style.opacity = Sound.enabled ? '1' : '0.4';
   mIcon.style.opacity = Sound.musicEnabled ? '1' : '0.4';
 }
-document.getElementById('soundToggleBtn').addEventListener('click',()=>{
-  Sound.toggle(); updateSoundIcons(); Sound.click();
-});
-document.getElementById('musicToggleBtn').addEventListener('click',()=>{
-  Sound.toggleMusic(); updateSoundIcons();
-});
+document.getElementById('soundToggleBtn').addEventListener('click',()=>{Sound.toggle();updateSoundIcons();Sound.click();});
+document.getElementById('musicToggleBtn').addEventListener('click',()=>{Sound.toggleMusic();updateSoundIcons();});
 
 // -------- SHOP SCREEN --------
 let activeShopTab = 'themes';
@@ -922,7 +858,6 @@ function renderShopScreen(tab){
     const isActive=(tab==='themes'&&activeTheme===item.id)||(tab==='skins'&&activeSkin===item.id);
     const el=document.createElement('div');
     el.className='shop-item'+(isActive?' active-item':isOwned?' owned':'');
-
     let previewHtml='';
     if(tab==='themes'&&item.preview){
       previewHtml=`<div class="theme-preview" style="background:${item.preview[0]}">
@@ -931,7 +866,6 @@ function renderShopScreen(tab){
         <div style="width:14px;height:14px;border-radius:50%;background:var(--c-violet);opacity:.8"></div>
       </div>`;
     }
-
     el.innerHTML=`
       ${isActive?'<div class="active-badge">AKTİF</div>':isOwned?'<div class="owned-badge">SAHİP</div>':''}
       <span class="item-icon">${item.icon}</span>
@@ -940,18 +874,14 @@ function renderShopScreen(tab){
       <div class="item-desc">${item.desc}</div>
       <div class="item-price${item.price===0?' free':''}">💎 ${item.price===0?'Ücretsiz':item.price+' RP'}</div>
     `;
-
     el.addEventListener('click',()=>{
       Sound.click();
       if(isActive)return;
       if(isOwned||item.price===0){
-        // activate
         if(tab==='themes'){setActiveTheme(item.id);}
         else if(tab==='skins'){setActiveSkin(item.id);}
         else if(tab==='boosts'){
-          // consumable
           if(!spendGems(item.price)){showToast('Yeterli Renk Parası yok!');return;}
-          if(item.id==='extra_heart'){}// applied in game
           if(item.id==='coin_magnet')addCoinMagnet(5);
           if(item.id==='hint_pack')addHintPack(5);
           Sound.purchase();
@@ -959,7 +889,6 @@ function renderShopScreen(tab){
         }
         renderShopScreen(tab);
       } else {
-        // buy
         if(getGems()<item.price){showToast('Yeterli Renk Parası yok! 💎');return;}
         if(spendGems(item.price)){
           addOwned(item.id);
@@ -975,7 +904,6 @@ function renderShopScreen(tab){
   });
 }
 
-// Simple toast
 function showToast(msg){
   let t=document.getElementById('_toast');
   if(!t){t=document.createElement('div');t.id='_toast';Object.assign(t.style,{position:'fixed',bottom:'80px',left:'50%',transform:'translateX(-50%)',background:'var(--panel)',border:'1px solid var(--line)',borderRadius:'12px',padding:'10px 18px',fontSize:'13px',fontWeight:'600',zIndex:'999',transition:'opacity .3s',whiteSpace:'nowrap'});document.body.appendChild(t);}
@@ -993,10 +921,8 @@ function renderMapScreen(mapId){
     const btn=document.createElement('button');
     btn.className='map-tab'+(m.id===mapId?' active':'');
     btn.textContent=m.name;
-    const isLocked=m.id==='desert'&&getDoneSet().size<40;
-    btn.disabled=isLocked;
-    if(isLocked)btn.textContent+=' 🔒';
-    btn.addEventListener('click',()=>{Sound.click();renderMapScreen(m.id);});
+    // ALL LEVELS UNLOCKED — no lock check
+    btn.addEventListener('click',()=>{Sound.click();updateMapDecos(m.id);renderMapScreen(m.id);});
     tabsEl.appendChild(btn);
   });
   const map=MAPS.find(m=>m.id===mapId);
@@ -1008,29 +934,27 @@ function renderMapScreen(mapId){
   for(let lv=map.levelStart;lv<=map.levelEnd;lv++){
     const cell=document.createElement('div');
     const isDone=done.has(lv);const hasCoin=coins.has(lv);
-    const isUnlocked=lv===map.levelStart||coins.has(lv-1)||done.has(lv-1);
-    cell.className='map-cell'+(isDone?' done':'')+(isUnlocked?'':' locked')+(hasCoin?' has-coin':'');
+    // ALL LEVELS UNLOCKED
+    cell.className='map-cell'+(isDone?' done':'')+(hasCoin?' has-coin':'');
     const num=document.createElement('div');num.className='lvl-num';num.textContent=lv;
     const coin=document.createElement('div');coin.className='coin-dot';
-    if(!isUnlocked){const lock=document.createElement('div');lock.className='lock-icon';lock.textContent='🔒';cell.appendChild(lock);}
     cell.appendChild(num);cell.appendChild(coin);
-    if(isUnlocked){cell.addEventListener('click',()=>{Sound.click();showGame(lv);});}
+    cell.addEventListener('click',()=>{Sound.click();updateMapDecos(mapId);showGame(lv);});
     gridEl2.appendChild(cell);
   }
 }
 
 // -------- START LEVEL --------
 function startLevel(level){
-  levelsSinceAd++;
   const gen=generateLevel(level);
   state.level=level;state.map=gen.map;state.size=gen.size;
   state.cells=gen.cells;state.gates=gen.gates;state.palette=gen.palette;
   let baseHearts=heartsForLIM(level-gen.map.levelStart+1);
-  // extra_heart boost: check owned and consumable
   state.hearts=baseHearts;state.maxHearts=baseHearts;
   state.busy=false;state.solved=false;
   state.coin=gen.coin;
   state.coinCollected=getCoinSet().has(level);
+  state.ceruleanBoostEarned=0;
   // coin magnet auto-collect
   if(!state.coinCollected && getCoinMagnet()>0){
     useCoinMagnet();
@@ -1040,40 +964,8 @@ function startLevel(level){
   state.recolorUsed=false;state.greenUsesLeft=2;
   closeColorPicker();
   applyTheme(getActiveTheme());
+  updateMapDecos(gen.map.id);
   render();
-  // Show rewarded ad option on game screen (in footer area as optional button)
-  renderRewardedAdBtn();
-}
-
-function renderRewardedAdBtn(){
-  // Add a small "Watch ad for +3 coins" button to footer if not already
-  let existing = document.getElementById('rewardAdBtn');
-  if(existing) existing.remove();
-  // Show only sometimes (not every level — every 3 levels)
-  if(state.level % 3 !== 0) return;
-  const footer = document.querySelector('footer');
-  const btn = document.createElement('div');
-  btn.id='rewardAdBtn';
-  btn.className='btn';
-  btn.style.background='rgba(255,215,0,.08)';
-  btn.style.borderColor='rgba(255,215,0,.3)';
-  btn.style.color='var(--coin)';
-  btn.style.fontSize='12px';
-  btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>+3 Coin`;
-  btn.addEventListener('click',()=>{
-    Sound.click();
-    Ads.showRewarded((rewarded)=>{
-      if(rewarded){
-        lsSet(SK.coins, getTotalCoins()+3);
-        coinHdrNum.textContent=getTotalCoins();
-        document.getElementById('menuCoinCount').textContent=getTotalCoins();
-        Sound.coin();
-        showToast('⭐ +3 Coin kazandın!');
-        btn.remove();
-      }
-    });
-  });
-  footer.appendChild(btn);
 }
 
 // -------- RENDER --------
@@ -1096,8 +988,9 @@ function renderHearts(){
 function renderAbilityBar(){
   const map=state.map;
   const hasGreen=map.colors.includes('green');
-  const hasNavy=map.colors.includes('navy');
   const hasViolet=map.colors.includes('violet');
+  const hasNavy=map.colors.includes('navy');
+  const hasCerulean=map.colors.includes('cerulean');
   let bars=[];
   if(hasViolet) bars.push({color:'violet',label:'Mor → Renk değiştir',count:'1x',used:state.recolorUsed});
   if(hasGreen){
@@ -1105,6 +998,7 @@ function renderAbilityBar(){
     bars.push({color:'green',label:'Yeşil → Engeli sil',customRight:`<div class="green-bar">${pips}</div>`});
   }
   if(hasNavy) bars.push({color:'navy',label:'Lacivert → Sarıya dön',count:'1x',used:state.recolorUsed});
+  if(hasCerulean) bars.push({color:'cerulean',label:'Berrak Mavi → Coin üstünde +15 RP',count:'💎'});
   if(bars.length===0){abilityBar.style.display='none';return;}
   abilityBar.style.display='flex';abilityBar.innerHTML='';
   for(const b of bars){
@@ -1182,6 +1076,7 @@ function positionGatesAndArrows(){
     el.innerHTML=arrowSvg(cell.dir);
     el.addEventListener('click',onArrowClick);
 
+    // Violet recolor badge
     if(cell.color==='violet'&&state.map.id==='start'){
       const badge=document.createElement('div');
       badge.className='special-badge'+(state.recolorUsed?' used':'');
@@ -1190,6 +1085,7 @@ function positionGatesAndArrows(){
       badge.addEventListener('click',e=>{e.stopPropagation();Sound.click();openVioletPicker(x,y);});
       el.appendChild(badge);
     }
+    // Navy recolor badge
     if(cell.color==='navy'&&state.map.id==='desert'){
       const badge=document.createElement('div');
       badge.className='special-badge'+(state.recolorUsed?' used':'');
@@ -1219,9 +1115,8 @@ function openVioletPicker(x,y){
   closeColorPicker();
   const options=state.palette.filter(c=>c!=='violet');
   const picker=document.createElement('div');picker.className='color-picker';
-  const arrowEl=gridEl.querySelector(`.arrow[data-x="${x}"][data-y="${y}"]`);
   const gr=gridEl.getBoundingClientRect();
-  const size=state.size,cw=gr.width/size,ch=gr.height/size;
+  const cw=gr.width/state.size,ch=gr.height/state.size;
   let left=x*cw,top=y*ch-50;
   if(top<0)top=y*ch+ch+4;
   left=Math.max(0,Math.min(left,gr.width-options.length*42-16));
@@ -1248,13 +1143,40 @@ function applyVioletRecolor(x,y,newColor){
 function applyNavyRecolor(x,y){
   if(state.busy||state.solved||state.recolorUsed)return;
   const cell=state.cells[y][x];if(!cell||cell.color!=='navy')return;
-  const v=DIRS[cell.dir];let cx=x,cy=y;
-  while(inBounds(cx+v.dx,cy+v.dy,state.size)){cx+=v.dx;cy+=v.dy;}
-  const ei=(cell.dir===0||cell.dir===2)?cx:cy;
+  const v=DIRS[cell.dir];let ex=x,ey=y;
+  while(inBounds(ex+v.dx,ey+v.dy,state.size)){ex+=v.dx;ey+=v.dy;}
+  const ei=(cell.dir===0||cell.dir===2)?ex:ey;
   const gk=`${cell.dir}-${ei}`;
   if(state.gates[gk]){state.gates[gk].delete('navy');state.gates[gk].add('yellow');}
   cell.color='yellow';state.recolorUsed=true;
   positionGatesAndArrows();renderAbilityBar();
+}
+
+// -------- CERULEAN BOOST CHECK --------
+// Check if cerulean arrow's path contains the coin
+function checkCeruleanBoost(x, y, pathCells) {
+  const cell = state.cells[y][x];
+  if (!cell || cell.color !== 'cerulean') return;
+  if (!state.coin) return;
+  // Check if coin is on the path
+  const onPath = pathCells.some(p => p.x === state.coin.x && p.y === state.coin.y);
+  if (!onPath) return;
+  // Give +15 RP
+  addGems(15);
+  state.ceruleanBoostEarned += 15;
+  Sound.ceruleanBoost();
+  // Show visual notif on board
+  const rect = gridEl.getBoundingClientRect();
+  const cw = rect.width/state.size, ch = rect.height/state.size;
+  const notif = document.createElement('div');
+  notif.className = 'cerulean-boost-notif';
+  notif.textContent = '+15 💎 Berrak Mavi Boost!';
+  notif.style.left = (state.coin.x * cw) + 'px';
+  notif.style.top = (state.coin.y * ch) + 'px';
+  gridEl.appendChild(notif);
+  setTimeout(() => notif.remove(), 750);
+  // Update gem count display
+  document.getElementById('menuGemCount').textContent = getGems();
 }
 
 // -------- MOVE --------
@@ -1296,12 +1218,16 @@ function attemptMove(x,y){
   }
 
   const allPathCells=[{x,y},...pathCells];
+
+  // Cerulean boost check BEFORE collecting coin
+  checkCeruleanBoost(x, y, allPathCells);
+
+  // Coin collection
   if(state.coin&&!state.coinCollected){
     const hit=allPathCells.some(p=>p.x===state.coin.x&&p.y===state.coin.y);
     if(hit)collectCoin();
   }
 
-  const edgeIdx=(cell.dir===0||cell.dir===2)?cx-v.dx:cy-v.dy; // exit edge position... recompute:
   let ex2=x,ey2=y;
   while(inBounds(ex2+v.dx,ey2+v.dy,size)){ex2+=v.dx;ey2+=v.dy;}
   const edgeIdx2=(cell.dir===0||cell.dir===2)?ex2:ey2;
@@ -1359,7 +1285,6 @@ function checkSolved(){
   if(rem===0&&state.hearts>0){
     state.solved=true;
     markLevelDone(state.level);
-    // Earn gems
     addGems(50);
     Sound.success();
     showGemFloat(50, boardFrame);
@@ -1374,17 +1299,19 @@ function showSuccess(){
   modalTitle.textContent='Harika!';
   coinRewardEl.style.display=state.coinCollected?'inline-flex':'none';
   gemRewardEl.style.display='inline-flex';
-  modalText.textContent=`Seviye ${state.level} tamamlandı. 💎 Toplam: ${getGems()} Renk Parası`;
+  let gemNote = `Seviye ${state.level} tamamlandı. 💎 Toplam: ${getGems()} RP`;
+  if(state.ceruleanBoostEarned>0) gemNote += ` (+${state.ceruleanBoostEarned} Berrak Mavi boost!)`;
+  modalText.textContent=gemNote;
   modalBtns.innerHTML='';
   const next=state.level+1;
   const btn=document.createElement('div');
   btn.className='mbtn primary';btn.style.width='100%';
-  if(next>80){btn.textContent='Tüm Harita Bitti 🎉';}
+  if(next>120){btn.textContent='Tüm Harita Bitti 🎉';}
   else{btn.textContent='Sıradaki Seviye →';}
   btn.addEventListener('click',()=>{
     Sound.click();overlay.classList.remove('show');
     saveLevel(next);
-    if(next>80)showMenu();
+    if(next>120)showMenu();
     else showGame(next);
   });
   modalBtns.appendChild(btn);
@@ -1405,21 +1332,6 @@ function showFail(){
   const btn=document.createElement('div');btn.className='mbtn primary';btn.style.width='100%';btn.textContent='Yeniden Başla';
   btn.addEventListener('click',()=>{Sound.click();overlay.classList.remove('show');startLevel(state.level);});
   modalBtns.appendChild(btn);
-  // Revive with ad
-  const reviveBtn=document.createElement('div');reviveBtn.className='mbtn secondary';reviveBtn.style.width='100%';reviveBtn.textContent='📺 Reklam İzle → Can Kazan';
-  reviveBtn.addEventListener('click',()=>{
-    Sound.click();overlay.classList.remove('show');
-    Ads.showRewarded((rewarded)=>{
-      if(rewarded){
-        state.hearts=1;state.busy=false;state.solved=false;
-        render();
-        showToast('❤️ 1 Can kazandın!');
-      } else {
-        startLevel(state.level);
-      }
-    });
-  });
-  modalBtns.appendChild(reviveBtn);
   overlay.classList.add('show');
 }
 
@@ -1472,25 +1384,26 @@ const TUT_STEPS=[
   },
   {
     title:'Mor Ok → Renk Değiştir 🔮',
-    visual:`<div class="tv-col" style="position:relative"><div class="tv-arrow col-violet" style="position:relative">${arrowSvg(0)}<div class="tv-badge"><svg viewBox="0 0 24 24" fill="none" stroke="var(--c-violet)" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg></div></div></div>`,
+    visual:`<div class="tv-col" style="position:relative"><div class="tv-arrow col-violet" style="position:relative">${arrowSvg(0)}</div></div>`,
     text:'Mor okun rozetine tıkla, rengi değiştir (1 kez). <b>Kapı da güncellenir!</b>'
   },
   {
-    title:'Market 🛒',
-    visual:`<div style="font-size:40px">🛒</div>`,
-    text:'Renk Parası ile <b>Market\'ten</b> yeni arka planlar, ok görünümleri ve güçlendirmeler al!'
+    title:'Berrak Mavi → +15 RP Boost 💎',
+    visual:`<div class="tv-col"><div class="tv-arrow" style="background:var(--c-cerulean)">${arrowSvg(1)}</div></div><div class="tv-coin">⭐</div>`,
+    text:'Berrak Mavi ok önündeki Coin\'den geçerse <b>+15 Renk Parası</b> bonus kazanırsın!'
+  },
+  {
+    title:'Elmas Havuzları 💠',
+    visual:`<div style="font-size:44px">💎🏞️💎</div>`,
+    text:'81. seviyeden sonra <b>Elmas Havuzları</b> haritası açılır. Bordo, Deniz Mavisi, Haki, Berrak Mavi ve Akuamarin renkleri!'
   },
   {
     title:'Hazırsın! 🎉',
     visual:`<div style="font-size:48px">🚀</div>`,
-    text:'40 seviye "Başlangıç Renkler", sonra "Çöl Yolu" açılır. Coinleri topla!'
+    text:'Tüm seviyeler açık! İstediğin seviyeye atla, coinleri topla!'
   }
 ];
 let tutStep=0,tutCallback=null;
-function arrowSvg(dir){
-  const rot=[0,90,180,270][dir];
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rot}deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
-}
 function showTutorial(cb){tutCallback=cb;tutStep=0;tutOverlay.classList.add('show');renderTutStep();}
 function renderTutStep(){
   const s=TUT_STEPS[tutStep];
@@ -1515,7 +1428,6 @@ document.getElementById('tutSkip').addEventListener('click',()=>{Sound.click();s
 // -------- INIT --------
 applyTheme(getActiveTheme());
 showMenu();
-// Start music after first interaction
 document.body.addEventListener('pointerdown',()=>{
   if(Sound.musicEnabled)Sound.startMusic();
 },{once:true});
