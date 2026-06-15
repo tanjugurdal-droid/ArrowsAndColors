@@ -1,1 +1,1524 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Arrows & Colors</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap');
+:root{
+  --bg:#161A26;--panel:#20263A;--line:#2E3650;
+  --text:#EAEDF6;--dim:#8A93B0;--danger:#FF4D6D;
+  --c-orange:#FF6B35;--c-teal:#4ECDC4;--c-yellow:#FFD93D;--c-violet:#A06CD5;
+  --c-green:#5FBE6B;--c-red:#E5534B;--c-pink:#F2789F;--c-navy:#3E5C9A;--c-brown:#A9744F;
+  --coin:#FFD700;--gem:#A06CD5;
+  --theme-bg1:var(--bg);--theme-bg2:var(--panel);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden;touch-action:none;user-select:none}
+#app{height:100%;display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto;padding:env(safe-area-inset-top,12px) 14px env(safe-area-inset-bottom,12px)}
+.hidden{display:none!important}
 
+/* -------- THEMES -------- */
+body.theme-cosmos{--bg:#0D0D1A;--panel:#1A1A2E;}
+body.theme-forest{--bg:#0D1F0D;--panel:#152615;}
+body.theme-sunset{--bg:#1F0D0D;--panel:#2A1515;}
+body.theme-ocean{--bg:#0D1A2A;--panel:#112233;}
+body.theme-candy{--bg:#1A0D1F;--panel:#261530;}
+
+/* -------- COLORS -------- */
+.col-orange{background:var(--c-orange)}.col-teal{background:var(--c-teal)}.col-yellow{background:var(--c-yellow)}.col-violet{background:var(--c-violet)}
+.col-green{background:var(--c-green)}.col-red{background:var(--c-red)}.col-pink{background:var(--c-pink)}.col-navy{background:var(--c-navy)}.col-brown{background:var(--c-brown)}
+
+/* -------- MENU -------- */
+#menuScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px;gap:0;position:relative}
+.menu-hero{width:132px;height:132px;position:relative;margin-bottom:28px}
+.hero-arrow{position:absolute;width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.35);animation:heroPulse 2.4s ease-in-out infinite}
+.hero-arrow svg{width:60%;height:60%}
+.hero-arrow.a-up{background:var(--c-teal);top:0;left:50%;transform:translateX(-50%);--tx:-50%}
+.hero-arrow.a-right{background:var(--c-orange);top:50%;right:0;transform:translateY(-50%);--ty:-50%;animation-delay:.2s}
+.hero-arrow.a-down{background:var(--c-yellow);bottom:0;left:50%;transform:translateX(-50%);--tx:-50%;animation-delay:.4s}
+.hero-arrow.a-left{background:var(--c-violet);top:50%;left:0;transform:translateY(-50%);--ty:-50%;animation-delay:.6s}
+.hero-center{position:absolute;top:50%;left:50%;width:46px;height:46px;border-radius:50%;transform:translate(-50%,-50%);background:var(--bg);box-shadow:inset 0 0 0 2px var(--line)}
+@keyframes heroPulse{0%,100%{filter:brightness(1);transform:scale(1) translate(var(--tx,0),var(--ty,0))}50%{filter:brightness(1.2);transform:scale(1.06) translate(var(--tx,0),var(--ty,0))}}
+.menu-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;margin-bottom:6px}
+.menu-title .acc{background:linear-gradient(135deg,var(--c-teal),var(--c-violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.menu-sub{color:var(--dim);font-size:13px;margin-bottom:32px;max-width:270px;line-height:1.5}
+.menu-actions{width:100%;max-width:320px;display:flex;flex-direction:column;gap:10px}
+.mbtn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;border-radius:16px;padding:15px 16px;cursor:pointer;border:none;transition:transform .08s,filter .15s;text-align:center}
+.mbtn:active{transform:scale(.97)}
+.mbtn.primary{background:linear-gradient(135deg,var(--c-teal),var(--c-violet));color:#0d1020}
+.mbtn.secondary{background:var(--panel);color:var(--text);border:1px solid var(--line)}
+.mbtn.secondary:disabled{opacity:.45;cursor:default}
+.mbtn .msub{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:11px;margin-top:2px;opacity:.72}
+.menu-note{margin-top:22px;color:var(--dim);font-size:11px}
+.menu-coin-badge{position:absolute;top:14px;right:14px;background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.35);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px;color:var(--coin)}
+.map-btn{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.map-btn svg{width:18px;height:18px}
+.map-btn:active{transform:scale(.94)}
+/* menu bottom icons */
+.menu-bottom-icons{position:absolute;bottom:20px;display:flex;gap:14px;align-items:center}
+.menu-icon-btn{width:44px;height:44px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s}
+.menu-icon-btn:active{transform:scale(.92)}
+.menu-icon-btn svg{width:20px;height:20px}
+/* gem badge */
+.gem-badge{position:absolute;top:58px;right:14px;background:rgba(160,108,213,.15);border:1px solid rgba(160,108,213,.35);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px;color:var(--gem)}
+
+/* -------- MAP SCREEN -------- */
+#mapScreen{height:100%;width:100%;display:flex;flex-direction:column}
+.map-header{display:flex;align-items:center;gap:12px;padding:14px 4px 10px;width:100%}
+.map-header h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;flex:1}
+.map-tabs{display:flex;gap:8px;padding:0 4px 14px;width:100%;overflow-x:auto;scrollbar-width:none}
+.map-tabs::-webkit-scrollbar{display:none}
+.map-tab{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;padding:8px 16px;border-radius:20px;background:var(--panel);border:1px solid var(--line);cursor:pointer;white-space:nowrap;transition:all .15s;color:var(--text)}
+.map-tab.active{background:linear-gradient(135deg,var(--c-teal),var(--c-violet));color:#0d1020;border-color:transparent}
+.map-tab:disabled{opacity:.4;cursor:default}
+.map-grid{flex:1;overflow-y:auto;padding:4px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-content:start;scrollbar-width:none}
+.map-grid::-webkit-scrollbar{display:none}
+.map-cell{aspect-ratio:1;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s,background .15s;gap:2px;position:relative}
+.map-cell:active{transform:scale(.94)}
+.map-cell .lvl-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px}
+.map-cell .coin-dot{width:6px;height:6px;border-radius:50%;background:var(--coin);opacity:.8}
+.map-cell.done{background:rgba(78,205,196,.12);border-color:rgba(78,205,196,.3)}
+.map-cell.done .lvl-num{color:var(--c-teal)}
+.map-cell.locked{opacity:.35;cursor:default}
+.map-cell.locked .lvl-num{color:var(--dim)}
+.map-cell.has-coin .coin-dot{opacity:1}
+.map-cell .lock-icon{font-size:12px;line-height:1}
+.map-coin-bar{display:flex;align-items:center;gap:8px;padding:8px 4px 2px;font-size:13px;color:var(--dim)}
+.map-coin-bar strong{color:var(--coin);font-family:'Space Grotesk',sans-serif}
+
+/* -------- GAME SCREEN -------- */
+#gameScreen{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:6px 4px 8px}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.back-btn{width:38px;height:38px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.back-btn svg{width:18px;height:18px}
+.back-btn:active{transform:scale(.94)}
+.level-tag{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.level-tag small{color:var(--dim);font-size:12px;font-weight:500;margin-left:3px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.hearts{display:flex;gap:5px}
+.heart{width:18px;height:18px}
+.heart svg{width:100%;height:100%}
+.coin-hdr{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--coin);background:rgba(255,215,0,.1);border-radius:12px;padding:4px 10px}
+.coin-hdr .star{font-size:14px}
+
+/* ability bars */
+.ability-bar{width:100%;display:flex;gap:8px;padding:0 4px 6px}
+.ability-pill{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--dim)}
+.ability-pill .ab-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ability-pill.active{border-color:rgba(255,255,255,.2);color:var(--text)}
+.ability-pill .ab-count{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--text)}
+
+/* board */
+.board-wrap{flex:1;width:100%;display:flex;align-items:center;justify-content:center;min-height:0;padding:4px}
+.board-frame{position:relative;background:var(--panel);border-radius:18px;padding:14px;box-shadow:0 8px 30px rgba(0,0,0,.35);aspect-ratio:1/1;width:min(100%,100%);height:min(100%,100%)}
+.grid{display:grid;gap:4px;width:100%;height:100%;position:relative;border-radius:10px}
+.cell{background:rgba(255,255,255,.03);border-radius:6px;position:relative;display:flex;align-items:center;justify-content:center}
+.cell.empty{background:rgba(255,255,255,.015)}
+
+/* skin modifiers */
+.arrow.skin-round{border-radius:50%!important}
+.arrow.skin-diamond{border-radius:4px!important;transform:rotate(45deg)}
+.arrow.skin-diamond svg{transform:rotate(-45deg)}
+.arrow.skin-glow{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 12px currentColor,0 0 20px currentColor!important}
+
+/* gates */
+.gate{position:absolute;border-radius:4px;opacity:.6;transition:background .3s}
+
+/* coin on grid */
+.grid-coin{position:absolute;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3;animation:coinPulse 1.6s ease-in-out infinite}
+@keyframes coinPulse{0%,100%{transform:scale(1) translate(-50%,-50%);filter:drop-shadow(0 0 4px rgba(255,215,0,.5))}50%{transform:scale(1.1) translate(-45%,-45%);filter:drop-shadow(0 0 8px rgba(255,215,0,.9))}}
+.grid-coin.collected{animation:coinCollect .35s ease forwards}
+@keyframes coinCollect{0%{transform:scale(1) translate(-50%,-50%);opacity:1}100%{transform:scale(2.2) translate(-50%,-50%);opacity:0}}
+
+/* arrows */
+.arrow{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.25);transition:transform .08s,box-shadow .12s}
+.arrow:active{transform:scale(.93)}
+.arrow svg{width:56%;height:56%;pointer-events:none}
+.arrow.sliding{transition:top .3s cubic-bezier(.4,0,.2,1),left .3s cubic-bezier(.4,0,.2,1),opacity .3s,transform .3s}
+.arrow.fading{opacity:0;transform:scale(.4)}
+.arrow.shake{animation:shake .3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.arrow.flash{box-shadow:0 0 0 4px rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,0,0,.18)}
+.arrow.col-green{box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.25),0 0 0 2px rgba(95,190,107,.4)}
+.special-badge{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
+.special-badge svg{width:12px;height:12px;pointer-events:none}
+.special-badge.used{opacity:.3;cursor:default}
+
+/* color picker */
+.color-picker{position:absolute;z-index:30;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.color-picker .swatch{width:34px;height:34px;border-radius:9px;cursor:pointer;border:2px solid transparent;transition:transform .1s}
+.color-picker .swatch:active{transform:scale(.9)}
+
+/* green bar */
+.green-bar{display:flex;gap:4px}
+.green-pip{width:8px;height:8px;border-radius:50%;background:var(--c-green);transition:opacity .2s}
+.green-pip.used{opacity:.2}
+
+/* footer */
+footer{width:100%;display:flex;gap:10px;padding:8px 4px 4px}
+.btn{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:background .15s,transform .08s}
+.btn:active{transform:scale(.97);background:#262d44}
+.btn svg{width:18px;height:18px}
+
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(10,12,20,.8);display:flex;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:all}
+.modal{background:var(--panel);border-radius:22px;padding:28px 24px;text-align:center;width:min(330px,88vw);border:1px solid var(--line);transform:translateY(10px) scale(.98);transition:transform .25s}
+.overlay.show .modal{transform:translateY(0) scale(1)}
+.modal h2{font-family:'Space Grotesk',sans-serif;font-size:24px;margin-bottom:8px}
+.modal p{color:var(--dim);font-size:13px;margin-bottom:20px;line-height:1.6}
+.modal-row{display:flex;gap:10px}
+.ring-anim{width:60px;height:60px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c-teal),var(--c-violet))}
+.ring-anim.fail{background:linear-gradient(135deg,var(--danger),var(--c-orange))}
+.ring-anim svg{width:30px;height:30px}
+.modal .mbtn{margin-top:0;width:100%}
+.coin-reward{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.25);border-radius:12px;padding:6px 14px;margin-bottom:8px;font-size:13px;color:var(--coin);font-weight:700}
+.gem-reward{display:inline-flex;align-items:center;gap:6px;background:rgba(160,108,213,.12);border:1px solid rgba(160,108,213,.25);border-radius:12px;padding:6px 14px;margin-bottom:14px;font-size:13px;color:var(--gem);font-weight:700}
+
+/* -------- AD OVERLAY -------- */
+#adOverlay{position:fixed;inset:0;background:rgba(5,7,15,.95);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
+#adOverlay.show{opacity:1;pointer-events:all}
+.ad-modal{background:var(--panel);border-radius:22px;padding:24px;text-align:center;width:min(320px,86vw);border:1px solid var(--line)}
+.ad-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.ad-banner{width:100%;height:120px;background:linear-gradient(135deg,#1a2a4a,#2a1a3a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:28px;position:relative;overflow:hidden}
+.ad-banner-text{font-family:'Space Grotesk',sans-serif;font-size:16px;color:rgba(255,255,255,.6)}
+.ad-timer{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--c-teal);margin-bottom:8px}
+.ad-desc{color:var(--dim);font-size:12px;margin-bottom:16px}
+.ad-skip{font-size:12px;color:var(--dim);cursor:pointer;text-decoration:underline;display:none}
+.ad-skip.visible{display:block}
+/* rewarded ad */
+.ad-reward-badge{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:8px 16px;font-size:14px;color:var(--coin);font-weight:700;margin-bottom:12px}
+
+/* -------- SHOP SCREEN -------- */
+#shopScreen{height:100%;width:100%;display:flex;flex-direction:column}
+.shop-header{display:flex;align-items:center;gap:12px;padding:14px 4px 10px;width:100%}
+.shop-header h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;flex:1}
+.shop-gem-bar{display:flex;align-items:center;gap:6px;background:rgba(160,108,213,.12);border:1px solid rgba(160,108,213,.3);border-radius:14px;padding:6px 12px;font-size:14px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--gem)}
+.shop-tabs{display:flex;gap:8px;padding:0 4px 12px;overflow-x:auto;scrollbar-width:none}
+.shop-tabs::-webkit-scrollbar{display:none}
+.shop-tab{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;padding:8px 16px;border-radius:20px;background:var(--panel);border:1px solid var(--line);cursor:pointer;white-space:nowrap;transition:all .15s;color:var(--text)}
+.shop-tab.active{background:linear-gradient(135deg,var(--gem),var(--c-teal));color:#0d1020;border-color:transparent}
+.shop-grid{flex:1;overflow-y:auto;padding:4px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;align-content:start;scrollbar-width:none}
+.shop-grid::-webkit-scrollbar{display:none}
+.shop-item{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:transform .08s,border-color .15s;position:relative}
+.shop-item:active{transform:scale(.97)}
+.shop-item.owned{border-color:rgba(78,205,196,.4);background:rgba(78,205,196,.05)}
+.shop-item.active-item{border-color:var(--c-teal);background:rgba(78,205,196,.1)}
+.shop-item .item-icon{font-size:36px;margin-bottom:8px;display:block}
+.shop-item .item-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px}
+.shop-item .item-desc{color:var(--dim);font-size:11px;margin-bottom:10px;line-height:1.4}
+.shop-item .item-price{display:inline-flex;align-items:center;gap:4px;background:rgba(160,108,213,.12);border:1px solid rgba(160,108,213,.25);border-radius:10px;padding:4px 10px;font-size:12px;font-weight:700;color:var(--gem)}
+.shop-item .item-price.free{background:rgba(78,205,196,.12);border-color:rgba(78,205,196,.25);color:var(--c-teal)}
+.shop-item .owned-badge{position:absolute;top:8px;right:8px;background:rgba(78,205,196,.2);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--c-teal)}
+.shop-item .active-badge{position:absolute;top:8px;right:8px;background:rgba(78,205,196,.35);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--c-teal)}
+/* preview for bg themes */
+.theme-preview{width:100%;height:36px;border-radius:8px;margin-bottom:10px;display:flex;gap:4px;align-items:center;justify-content:center;overflow:hidden}
+
+/* -------- TUTORIAL -------- */
+.tut-modal{background:var(--panel);border-radius:22px;padding:24px 20px;text-align:center;width:min(340px,90vw);border:1px solid var(--line);transform:translateY(10px) scale(.98);transition:transform .25s}
+.overlay.show .tut-modal{transform:translateY(0) scale(1)}
+.tut-modal h2{font-family:'Space Grotesk',sans-serif;font-size:20px;margin-bottom:10px}
+.tut-visual{height:80px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.tv-arrow{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.tv-arrow svg{width:55%;height:55%}
+.tv-gate{width:46px;height:7px;border-radius:3px}
+.tv-col{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tv-coin{width:26px;height:26px;border-radius:50%;background:var(--coin);box-shadow:0 0 8px rgba(255,215,0,.6);display:flex;align-items:center;justify-content:center;font-size:14px}
+.tv-badge{width:22px;height:22px;border-radius:50%;background:var(--bg);border:2px solid var(--c-violet);display:flex;align-items:center;justify-content:center}
+.tv-badge svg{width:12px;height:12px}
+.tut-text{color:var(--dim);font-size:13px;line-height:1.6;margin-bottom:18px;min-height:56px;display:flex;align-items:center;justify-content:center}
+.tut-dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+.tut-dot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:all .2s}
+.tut-dot.active{background:var(--c-teal);width:18px;border-radius:4px}
+.tut-actions{display:flex;gap:8px}
+.tut-skip{margin-top:12px;color:var(--dim);font-size:12px;cursor:pointer;text-decoration:underline}
+
+/* -------- SOUND TOGGLE -------- */
+.sound-btn-icon{font-size:16px}
+/* floating gem earn notif */
+@keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-60px)}}
+.float-notif{position:fixed;pointer-events:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--gem);animation:floatUp .9s ease forwards;z-index:200;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ===== MENU ===== -->
+<div id="menuScreen">
+  <div class="map-btn" id="mapBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+  </div>
+  <div class="menu-coin-badge" id="menuCoinBadge">⭐ <span id="menuCoinCount">0</span></div>
+  <div class="gem-badge" id="menuGemBadge">💎 <span id="menuGemCount">0</span></div>
+  <div class="menu-hero">
+    <div class="hero-arrow a-up"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>
+    <div class="hero-arrow a-right"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>
+    <div class="hero-arrow a-down"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>
+    <div class="hero-arrow a-left"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(270deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>
+    <div class="hero-center"></div>
+  </div>
+  <div class="menu-title">Arrows <span class="acc">&amp; Colors</span></div>
+  <div class="menu-sub">Her oku kendi renkli kapıdan çıkar. Coin topla, yolunu aç.</div>
+  <div class="menu-actions">
+    <button class="mbtn primary" id="playBtn">Oyna<span class="msub" id="playSub">Seviye 1'den başla</span></button>
+    <button class="mbtn secondary" id="continueBtn" disabled>Devam Et<span class="msub" id="continueSub">Henüz ilerleme yok</span></button>
+  </div>
+  <div class="menu-note">Süre yok. Sadece mantık ve renk.</div>
+  <div class="menu-bottom-icons">
+    <div class="menu-icon-btn" id="shopBtn" title="Market">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </div>
+    <div class="menu-icon-btn" id="soundToggleBtn" title="Ses">
+      <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </div>
+    <div class="menu-icon-btn" id="musicToggleBtn" title="Müzik">
+      <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAP SCREEN ===== -->
+<div id="mapScreen" class="hidden">
+  <div class="map-header">
+    <div class="back-btn" id="mapBackBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <h2>Harita</h2>
+    <div class="menu-coin-badge" style="position:static">⭐ <span id="mapCoinCount">0</span></div>
+  </div>
+  <div class="map-tabs" id="mapTabs"></div>
+  <div class="map-coin-bar">⭐ <strong id="mapCoinInfo">0 coin</strong> toplandı</div>
+  <div class="map-grid" id="mapGrid"></div>
+</div>
+
+<!-- ===== SHOP SCREEN ===== -->
+<div id="shopScreen" class="hidden">
+  <div class="shop-header">
+    <div class="back-btn" id="shopBackBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <h2>🛒 Market</h2>
+    <div class="shop-gem-bar">💎 <span id="shopGemCount">0</span></div>
+  </div>
+  <div class="shop-tabs" id="shopTabs"></div>
+  <div class="shop-grid" id="shopGrid"></div>
+</div>
+
+<!-- ===== GAME SCREEN ===== -->
+<div id="gameScreen" class="hidden">
+  <header>
+    <div class="hdr-left">
+      <div class="back-btn" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div class="level-tag">Seviye <span id="levelNum">1</span><small id="mapNameTag"></small></div>
+    </div>
+    <div class="hdr-right">
+      <div class="coin-hdr"><span class="star">⭐</span><span id="coinHdrNum">0</span></div>
+      <div class="hearts" id="hearts"></div>
+    </div>
+  </header>
+  <div class="ability-bar" id="abilityBar" style="display:none"></div>
+  <div class="board-wrap">
+    <div class="board-frame" id="boardFrame">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="btn" id="hintBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+      İpucu
+    </div>
+    <div class="btn" id="restartBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      Yeniden
+    </div>
+  </footer>
+</div>
+</div>
+
+<!-- ===== RESULT OVERLAY ===== -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="ring-anim" id="ringAnim"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2 id="modalTitle">Harika!</h2>
+    <div id="coinReward" class="coin-reward" style="display:none">⭐ +1 Coin topladın!</div>
+    <div id="gemReward" class="gem-reward" style="display:none">💎 +50 Renk Parası kazandın!</div>
+    <p id="modalText"></p>
+    <div class="modal-row" id="modalBtns"></div>
+  </div>
+</div>
+
+<!-- ===== TUTORIAL OVERLAY ===== -->
+<div class="overlay" id="tutOverlay">
+  <div class="tut-modal">
+    <h2 id="tutTitle"></h2>
+    <div class="tut-visual" id="tutVisual"></div>
+    <div class="tut-text" id="tutText"></div>
+    <div class="tut-dots" id="tutDots"></div>
+    <div class="tut-actions">
+      <div class="btn" id="tutPrev" style="flex:0.6">Geri</div>
+      <div class="btn primary" id="tutNext" style="background:linear-gradient(135deg,var(--c-teal),var(--c-violet));border:none;color:#0d1020;flex:1">İleri</div>
+    </div>
+    <div class="tut-skip" id="tutSkip">Rehberi Geç</div>
+  </div>
+</div>
+
+<!-- ===== AD OVERLAY ===== -->
+<div id="adOverlay">
+  <div class="ad-modal" id="adModal">
+    <div class="ad-label">Reklam</div>
+    <div class="ad-banner" id="adBanner">
+      <span class="ad-banner-text" id="adBannerText">🎮 Reklam Alanı</span>
+    </div>
+    <div id="adRewardBadge" class="ad-reward-badge" style="display:none">⭐ +3 Coin kazanacaksın!</div>
+    <div class="ad-timer" id="adTimer">5</div>
+    <div class="ad-desc" id="adDesc">Reklam izleniyor...</div>
+    <div class="ad-skip" id="adSkip">Geç →</div>
+    <div class="mbtn secondary" id="adWatchMore" style="display:none;margin-top:8px;font-size:13px">Reklam izle → +3 Coin</div>
+  </div>
+</div>
+
+<script>
+// ================================================================
+//  ARROWS & COLORS — Enhanced Edition
+//  + Sound, Music, Ads, Shop, Security, Gems
+// ================================================================
+
+// -------- SECURITY (anti-tamper) --------
+const SEC = {
+  key: 'aac_integrity',
+  fields: ['aac_coins','aac_coinset','aac_done','aac_gems'],
+  hash(data) {
+    let h = 5381;
+    for (let i = 0; i < data.length; i++) h = ((h << 5) + h + data.charCodeAt(i)) & 0xffffffff;
+    return (h >>> 0).toString(36);
+  },
+  build() {
+    const payload = this.fields.map(k => `${k}=${localStorage.getItem(k)||''}`).join('|');
+    return this.hash(payload + '_AC2024');
+  },
+  verify() {
+    const stored = localStorage.getItem(this.key);
+    if (!stored) return true; // first run
+    return stored === this.build();
+  },
+  save() {
+    localStorage.setItem(this.key, this.build());
+  }
+};
+
+// Check on load — if tampered, reset
+(function() {
+  try {
+    if (!SEC.verify()) {
+      console.warn('[AC] Save data integrity check failed. Resetting.');
+      ['aac_coins','aac_coinset','aac_done','aac_gems','aac_level','aac_integrity'].forEach(k => localStorage.removeItem(k));
+    }
+  } catch(e) {}
+})();
+
+// -------- SOUND ENGINE (Web Audio API) --------
+const Sound = (() => {
+  let ctx = null;
+  let enabled = localStorage.getItem('aac_sound') !== '0';
+  let musicEnabled = localStorage.getItem('aac_music') !== '0';
+  let musicNode = null, musicGain = null;
+
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function playTone(freq, type, dur, vol, delay=0) {
+    if (!enabled) return;
+    try {
+      const c = getCtx();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.connect(gain); gain.connect(c.destination);
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, c.currentTime + delay);
+      gain.gain.setValueAtTime(0, c.currentTime + delay);
+      gain.gain.linearRampToValueAtTime(vol, c.currentTime + delay + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + dur);
+      osc.start(c.currentTime + delay);
+      osc.stop(c.currentTime + delay + dur + 0.01);
+    } catch(e) {}
+  }
+
+  function playNoise(dur, vol=0.08) {
+    if (!enabled) return;
+    try {
+      const c = getCtx();
+      const buf = c.createBuffer(1, c.sampleRate * dur, c.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i=0;i<d.length;i++) d[i] = Math.random()*2-1;
+      const src = c.createBufferSource();
+      const gain = c.createGain();
+      src.buffer = buf; src.connect(gain); gain.connect(c.destination);
+      gain.gain.setValueAtTime(vol, c.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+      src.start();
+    } catch(e) {}
+  }
+
+  return {
+    get enabled() { return enabled; },
+    get musicEnabled() { return musicEnabled; },
+    toggle() { enabled = !enabled; localStorage.setItem('aac_sound', enabled?'1':'0'); },
+    toggleMusic() {
+      musicEnabled = !musicEnabled;
+      localStorage.setItem('aac_music', musicEnabled?'1':'0');
+      if (musicEnabled) this.startMusic();
+      else this.stopMusic();
+    },
+    // SFX presets
+    click() { playTone(440,'sine',0.08,0.15); },
+    arrowSlide() {
+      playTone(380,'sine',0.06,0.12);
+      playTone(480,'sine',0.08,0.1,0.05);
+    },
+    success() {
+      playTone(523,'sine',0.1,0.2);
+      playTone(659,'sine',0.1,0.2,0.1);
+      playTone(784,'sine',0.15,0.2,0.2);
+      playTone(1047,'sine',0.12,0.15,0.35);
+    },
+    fail() {
+      playTone(300,'sawtooth',0.08,0.2);
+      playTone(220,'sawtooth',0.12,0.18,0.1);
+      playNoise(0.15, 0.05);
+    },
+    heartLose() {
+      playTone(200,'sawtooth',0.06,0.15);
+      playNoise(0.08, 0.04);
+    },
+    coin() {
+      playTone(880,'sine',0.07,0.2);
+      playTone(1100,'sine',0.09,0.18,0.07);
+      playTone(1320,'sine',0.08,0.15,0.15);
+    },
+    hint() {
+      playTone(600,'sine',0.05,0.12);
+      playTone(800,'sine',0.07,0.1,0.06);
+    },
+    purchase() {
+      playTone(440,'sine',0.06,0.15);
+      playTone(554,'sine',0.08,0.15,0.08);
+      playTone(659,'sine',0.1,0.15,0.16);
+    },
+    gemEarn() {
+      playTone(700,'sine',0.06,0.15);
+      playTone(900,'triangle',0.08,0.12,0.07);
+    },
+    // Background music (simple procedural)
+    startMusic() {
+      if (!musicEnabled) return;
+      this.stopMusic();
+      try {
+        const c = getCtx();
+        musicGain = c.createGain();
+        musicGain.gain.value = 0.04;
+        musicGain.connect(c.destination);
+
+        const notes = [261,294,330,349,392,440,494,523];
+        const pattern = [0,2,4,5,7,7,5,4,2,0,0,2,4,7,5,4];
+        let step = 0;
+        const tempo = 0.42;
+
+        const playStep = () => {
+          if (!musicEnabled || !musicGain) return;
+          const note = notes[pattern[step % pattern.length]];
+          const osc = c.createOscillator();
+          const g = c.createGain();
+          osc.connect(g); g.connect(musicGain);
+          osc.type = 'triangle';
+          osc.frequency.value = note;
+          g.gain.setValueAtTime(0, c.currentTime);
+          g.gain.linearRampToValueAtTime(0.6, c.currentTime + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + tempo * 0.7);
+          osc.start(); osc.stop(c.currentTime + tempo);
+          step++;
+          musicNode = setTimeout(playStep, tempo * 1000);
+        };
+        playStep();
+      } catch(e) {}
+    },
+    stopMusic() {
+      if (musicNode) { clearTimeout(musicNode); musicNode = null; }
+      if (musicGain) { try { musicGain.disconnect(); } catch(e) {} musicGain = null; }
+    }
+  };
+})();
+
+// -------- COLOR DEFS --------
+const COLOR_HEX = {
+  orange:'#FF6B35',teal:'#4ECDC4',yellow:'#FFD93D',violet:'#A06CD5',
+  green:'#5FBE6B',red:'#E5534B',pink:'#F2789F',navy:'#3E5C9A',brown:'#A9744F'
+};
+
+// -------- MAPS --------
+const MAPS = [
+  {id:'start', name:'Başlangıç Renkler', colors:['orange','teal','yellow','violet'], levelStart:1, levelEnd:40},
+  {id:'desert', name:'Çöl Yolu', colors:['green','red','pink','navy','brown'], levelStart:41, levelEnd:80}
+];
+function getMap(level){ return MAPS.find(m=>level>=m.levelStart&&level<=m.levelEnd)||MAPS[0]; }
+
+// -------- SHOP DATA --------
+const SHOP_ITEMS = {
+  themes: [
+    {id:'default', name:'Varsayılan', desc:'Klasik koyu tema', icon:'🌑', price:0, preview:['#161A26','#20263A']},
+    {id:'cosmos', name:'Kozmos', desc:'Derin uzay hissi', icon:'🌌', price:150, preview:['#0D0D1A','#1A1A2E']},
+    {id:'forest', name:'Orman', desc:'Yeşil doğa temaları', icon:'🌿', price:200, preview:['#0D1F0D','#152615']},
+    {id:'sunset', name:'Gün Batımı', desc:'Sıcak turuncu tonlar', icon:'🌅', price:250, preview:['#1F0D0D','#2A1515']},
+    {id:'ocean', name:'Okyanus', desc:'Derin mavi derinlik', icon:'🌊', price:300, preview:['#0D1A2A','#112233']},
+    {id:'candy', name:'Şeker', desc:'Renkli tatlı dünya', icon:'🍬', price:350, preview:['#1A0D1F','#261530']},
+  ],
+  skins: [
+    {id:'default', name:'Normal', desc:'Klasik ok görünümü', icon:'➡️', price:0},
+    {id:'round', name:'Yuvarlak', desc:'Daire şekilli oklar', icon:'⭕', price:100},
+    {id:'diamond', name:'Elmas', desc:'Dörtgen döndürülmüş', icon:'💠', price:200},
+    {id:'glow', name:'Işıl Işıl', desc:'Parlak ışık efekti', icon:'✨', price:300},
+  ],
+  boosts: [
+    {id:'extra_heart', name:'+1 Can', desc:'Bu seviye için ekstra can', icon:'❤️', price:75, consumable:true},
+    {id:'coin_magnet', name:'Coin Mıknatıs', desc:'Sonraki 5 seviye otomatik coin', icon:'🧲', price:200, consumable:true},
+    {id:'hint_pack', name:'İpucu Paketi', desc:'5 ücretsiz ipucu hakkı', icon:'💡', price:150, consumable:true},
+  ]
+};
+
+// -------- DIFFICULTY --------
+const DIRS = [{dx:0,dy:-1},{dx:1,dy:0},{dx:0,dy:1},{dx:-1,dy:0}];
+function sizeForLIM(lim){ if(lim<=2)return 4;if(lim<=6)return 5;if(lim<=12)return 6;if(lim<=20)return 7;return 8; }
+function colorCountForLIM(lim,max){ let c=lim<=2?2:lim<=5?3:lim<=9?4:5; return Math.min(c,max); }
+function heartsForLIM(lim){ return lim<=5?3:lim<=14?2:1; }
+function densityForLIM(lim){ return Math.min(0.62+lim*0.012,0.85); }
+function inBounds(x,y,s){ return x>=0&&y>=0&&x<s&&y<s; }
+
+// -------- RNG --------
+function makeRng(seed){
+  let s=seed;
+  return()=>{ s=(s*9301+49297)%233280; return s/233280; };
+}
+function shuffle(a,rng){ for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];} }
+
+// -------- LEVEL GENERATION --------
+function generateLevel(level){
+  const map = getMap(level);
+  const lim = level - map.levelStart + 1;
+  const size = sizeForLIM(lim);
+  const cc = colorCountForLIM(lim, map.colors.length);
+  const palette = map.colors.slice(0,cc);
+  const rng = makeRng(level*7919+13);
+  const density = densityForLIM(lim);
+  const num = Math.floor(size*size*density);
+
+  let positions=[];
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++)positions.push({x,y});
+  shuffle(positions,rng);
+  const chosen=positions.slice(0,num);
+
+  const present=new Set(), placed={}, gateMap={};
+
+  for(let k=chosen.length-1;k>=0;k--){
+    const {x,y}=chosen[k];
+    let dirs=[0,1,2,3]; shuffle(dirs,rng);
+    let cdir=null,ccol=null;
+    for(const d of dirs){
+      const v=DIRS[d]; let cx=x,cy=y,ok=true;
+      while(true){cx+=v.dx;cy+=v.dy;if(!inBounds(cx,cy,size))break;if(present.has(`${cx},${cy}`)){ok=false;break;}}
+      if(!ok)continue;
+      const ex=cx-v.dx,ey=cy-v.dy;
+      const ei=(d===0||d===2)?ex:ey;
+      const gk=`${d}-${ei}`;
+      const exist=gateMap[gk]||new Set();
+      let cands=palette.slice(); shuffle(cands,rng);
+      let pick=null;
+      for(const c of cands){if(exist.has(c)||exist.size<2){pick=c;break;}}
+      if(!pick)continue;
+      cdir=d; ccol=pick; break;
+    }
+    if(cdir===null)continue;
+    placed[`${x},${y}`]={color:ccol,dir:cdir};
+    present.add(`${x},${y}`);
+    const v=DIRS[cdir]; let cx=x,cy=y;
+    while(inBounds(cx+v.dx,cy+v.dy,size)){cx+=v.dx;cy+=v.dy;}
+    const ei=(cdir===0||cdir===2)?cx:cy;
+    const gk=`${cdir}-${ei}`;
+    if(!gateMap[gk])gateMap[gk]=new Set();
+    gateMap[gk].add(ccol);
+  }
+
+  const cells=Array.from({length:size},()=>Array(size).fill(null));
+  for(const k in placed){const[x,y]=k.split(',').map(Number);cells[y][x]=placed[k];}
+
+  const gates={};
+  const paths={};
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+    const cell=cells[y][x]; if(!cell)continue;
+    const v=DIRS[cell.dir]; let cx=x,cy=y; const path=[];
+    while(inBounds(cx+v.dx,cy+v.dy,size)){cx+=v.dx;cy+=v.dy;path.push({x:cx,y:cy});}
+    paths[`${x},${y}`]=path;
+    const ei=(cell.dir===0||cell.dir===2)?cx:cy;
+    const k=`${cell.dir}-${ei}`;
+    if(!gates[k])gates[k]=new Set();
+    gates[k].add(cell.color);
+  }
+
+  let coin=null;
+  let empties=[];
+  for(const k in paths)for(const p of paths[k])if(!cells[p.y][p.x])empties.push(p);
+  if(empties.length){shuffle(empties,rng);coin=empties[0];}
+  else{
+    let starts=[];for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(cells[y][x])starts.push({x,y});
+    if(starts.length){shuffle(starts,rng);coin=starts[0];}
+  }
+
+  return{size,cells,gates,palette,coin,map};
+}
+
+// -------- SAVE / LOAD --------
+const SK={
+  level:'aac_level',coins:'aac_coins',coinSet:'aac_coinset',done:'aac_done',tutDone:'aac_tut',
+  gems:'aac_gems',owned:'aac_owned',activeTheme:'aac_theme',activeSkin:'aac_skin',
+  hintPack:'aac_hints',coinMagnet:'aac_magnet',
+};
+function lsGet(k){try{return localStorage.getItem(k);}catch{return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,String(v));SEC.save();}catch{}}
+function getSavedLevel(){const n=parseInt(lsGet(SK.level));return n>1?n:null;}
+function saveLevel(n){lsSet(SK.level,n);}
+function getTotalCoins(){return parseInt(lsGet(SK.coins)||'0');}
+function getCoinSet(){try{return new Set(JSON.parse(lsGet(SK.coinSet)||'[]'));}catch{return new Set();}}
+function getDoneSet(){try{return new Set(JSON.parse(lsGet(SK.done)||'[]'));}catch{return new Set();}}
+function markCoinCollected(level){
+  const s=getCoinSet();if(s.has(level))return;
+  s.add(level);lsSet(SK.coinSet,JSON.stringify([...s]));
+  lsSet(SK.coins,getTotalCoins()+1);
+}
+function markLevelDone(level){const s=getDoneSet();s.add(level);lsSet(SK.done,JSON.stringify([...s]));}
+function isTutDone(){return lsGet(SK.tutDone)==='1';}
+function setTutDone(){lsSet(SK.tutDone,'1');}
+// Gems (Renk Parası)
+function getGems(){return parseInt(lsGet(SK.gems)||'0');}
+function addGems(n){lsSet(SK.gems,getGems()+n);}
+function spendGems(n){const g=getGems();if(g<n)return false;lsSet(SK.gems,g-n);return true;}
+// Owned shop items
+function getOwned(){try{return new Set(JSON.parse(lsGet(SK.owned)||'["default"]'));}catch{return new Set(['default']);}}
+function addOwned(id){const s=getOwned();s.add(id);lsSet(SK.owned,JSON.stringify([...s]));}
+function getActiveTheme(){return lsGet(SK.activeTheme)||'default';}
+function setActiveTheme(id){lsSet(SK.activeTheme,id);applyTheme(id);}
+function getActiveSkin(){return lsGet(SK.activeSkin)||'default';}
+function setActiveSkin(id){lsSet(SK.activeSkin,id);}
+// Boosts
+function getHintPack(){return parseInt(lsGet(SK.hintPack)||'0');}
+function addHintPack(n){lsSet(SK.hintPack,getHintPack()+n);}
+function useHint(){const h=getHintPack();if(h>0){lsSet(SK.hintPack,h-1);return true;}return false;}
+function getCoinMagnet(){return parseInt(lsGet(SK.coinMagnet)||'0');}
+function addCoinMagnet(n){lsSet(SK.coinMagnet,getCoinMagnet()+n);}
+function useCoinMagnet(){const m=getCoinMagnet();if(m>0){lsSet(SK.coinMagnet,m-1);return true;}return false;}
+
+function applyTheme(id){
+  document.body.className = id==='default'?'': `theme-${id}`;
+}
+
+// -------- AD SYSTEM --------
+const Ads = (() => {
+  let adCallback = null;
+  let adTimer = null;
+  let isRewarded = false;
+  const adOverlay = document.getElementById('adOverlay');
+  const adTimerEl = document.getElementById('adTimer');
+  const adSkip = document.getElementById('adSkip');
+  const adDesc = document.getElementById('adDesc');
+  const adRewardBadge = document.getElementById('adRewardBadge');
+  const adBannerText = document.getElementById('adBannerText');
+  const adWatchMore = document.getElementById('adWatchMore');
+
+  const AD_COPY = [
+    {emoji:'🎮', text:'Yeni Oyunlar Her Gün'},
+    {emoji:'🏆', text:'Turnuvaya Katıl!'},
+    {emoji:'💫', text:'Özel Teklif: Premium'},
+    {emoji:'🎯', text:'Zeka Oyunları Dünyası'},
+    {emoji:'🌟', text:'Top Oyuncu Ol!'},
+  ];
+
+  function showAd(rewarded, onComplete) {
+    isRewarded = rewarded;
+    adCallback = onComplete;
+    const ad = AD_COPY[Math.floor(Math.random()*AD_COPY.length)];
+    adBannerText.textContent = `${ad.emoji} ${ad.text}`;
+    adRewardBadge.style.display = rewarded ? 'block' : 'none';
+    adSkip.classList.remove('visible');
+    adWatchMore.style.display = 'none';
+    adDesc.textContent = rewarded ? 'Reklam izleyerek coin kazan!' : 'Kısa reklam arası...';
+
+    let t = rewarded ? 10 : 5;
+    adTimerEl.textContent = t;
+    adOverlay.classList.add('show');
+
+    adTimer = setInterval(() => {
+      t--;
+      adTimerEl.textContent = t;
+      if (t <= 3) adSkip.classList.add('visible');
+      if (t <= 0) {
+        clearInterval(adTimer);
+        finish();
+      }
+    }, 1000);
+  }
+
+  function finish() {
+    clearInterval(adTimer);
+    adOverlay.classList.remove('show');
+    if (adCallback) { adCallback(isRewarded); adCallback = null; }
+  }
+
+  adSkip.addEventListener('click', finish);
+
+  return {
+    showInterstitial(onDone) { showAd(false, onDone); },
+    showRewarded(onDone) { showAd(true, onDone); }
+  };
+})();
+
+// -------- STATE --------
+let state={
+  level:1,map:MAPS[0],size:4,cells:[],gates:{},palette:[],
+  hearts:3,maxHearts:3,busy:false,solved:false,
+  coin:null,coinCollected:false,
+  recolorUsed:false,greenUsesLeft:2
+};
+
+// Track for ads: level counter since last interstitial
+let levelsSinceAd = 0;
+
+// -------- DOM --------
+const menuScreen=document.getElementById('menuScreen');
+const mapScreen=document.getElementById('mapScreen');
+const shopScreen=document.getElementById('shopScreen');
+const gameScreen=document.getElementById('gameScreen');
+const gridEl=document.getElementById('grid');
+const boardFrame=document.getElementById('boardFrame');
+const heartsEl=document.getElementById('hearts');
+const levelNumEl=document.getElementById('levelNum');
+const mapNameTag=document.getElementById('mapNameTag');
+const coinHdrNum=document.getElementById('coinHdrNum');
+const abilityBar=document.getElementById('abilityBar');
+const overlay=document.getElementById('overlay');
+const modalTitle=document.getElementById('modalTitle');
+const coinRewardEl=document.getElementById('coinReward');
+const gemRewardEl=document.getElementById('gemReward');
+const modalText=document.getElementById('modalText');
+const modalBtns=document.getElementById('modalBtns');
+const ringAnim=document.getElementById('ringAnim');
+const tutOverlay=document.getElementById('tutOverlay');
+
+// -------- GEM FLOAT NOTIF --------
+function showGemFloat(amount, el) {
+  const notif = document.createElement('div');
+  notif.className = 'float-notif';
+  notif.textContent = `+${amount} 💎`;
+  const rect = (el||document.body).getBoundingClientRect();
+  notif.style.left = (rect.left + rect.width/2 - 20) + 'px';
+  notif.style.top = (rect.top - 10) + 'px';
+  document.body.appendChild(notif);
+  setTimeout(() => notif.remove(), 950);
+}
+
+// -------- NAVIGATION --------
+function showMenu(){
+  [mapScreen,gameScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
+  menuScreen.classList.remove('hidden');
+  updateMenuCoins();
+  const saved=getSavedLevel();
+  const contBtn=document.getElementById('continueBtn');
+  const contSub=document.getElementById('continueSub');
+  if(saved){contBtn.disabled=false;contSub.textContent=`Seviye ${saved} - Devam`;}
+  else{contBtn.disabled=true;contSub.textContent='Henüz ilerleme yok';}
+  updateSoundIcons();
+}
+function updateMenuCoins(){
+  const n=getTotalCoins();
+  document.getElementById('menuCoinCount').textContent=n;
+  document.getElementById('coinHdrNum').textContent=n;
+  document.getElementById('menuGemCount').textContent=getGems();
+}
+function showMapScreen(mapId){
+  [menuScreen,gameScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
+  mapScreen.classList.remove('hidden');
+  renderMapScreen(mapId||'start');
+}
+function showShopScreen(){
+  [menuScreen,gameScreen,mapScreen].forEach(s=>s.classList.add('hidden'));
+  shopScreen.classList.remove('hidden');
+  renderShopScreen('themes');
+}
+function showGame(level){
+  [menuScreen,mapScreen,shopScreen].forEach(s=>s.classList.add('hidden'));
+  gameScreen.classList.remove('hidden');
+  // Check if interstitial needed (every 5 levels, not on level 1)
+  if(level>1 && levelsSinceAd>=5){
+    levelsSinceAd=0;
+    Ads.showInterstitial(()=>startLevel(level));
+  } else {
+    startLevel(level);
+  }
+}
+
+document.getElementById('mapBtn').addEventListener('click',()=>{Sound.click();showMapScreen('start');});
+document.getElementById('mapBackBtn').addEventListener('click',()=>{Sound.click();showMenu();});
+document.getElementById('shopBtn').addEventListener('click',()=>{Sound.click();showShopScreen();});
+document.getElementById('shopBackBtn').addEventListener('click',()=>{Sound.click();showMenu();});
+document.getElementById('playBtn').addEventListener('click',()=>{
+  Sound.click();
+  if(!isTutDone()) showTutorial(()=>showGame(1));
+  else showGame(1);
+});
+document.getElementById('continueBtn').addEventListener('click',()=>{
+  Sound.click();
+  const saved=getSavedLevel()||1;
+  showGame(saved);
+});
+document.getElementById('backBtn').addEventListener('click',()=>{Sound.click();showMenu();});
+document.getElementById('hintBtn').addEventListener('click',showHint);
+document.getElementById('restartBtn').addEventListener('click',()=>{Sound.click();startLevel(state.level);});
+
+// Sound & Music toggles
+function updateSoundIcons(){
+  const sIcon = document.getElementById('soundIcon');
+  const mIcon = document.getElementById('musicIcon');
+  sIcon.style.opacity = Sound.enabled ? '1' : '0.4';
+  mIcon.style.opacity = Sound.musicEnabled ? '1' : '0.4';
+}
+document.getElementById('soundToggleBtn').addEventListener('click',()=>{
+  Sound.toggle(); updateSoundIcons(); Sound.click();
+});
+document.getElementById('musicToggleBtn').addEventListener('click',()=>{
+  Sound.toggleMusic(); updateSoundIcons();
+});
+
+// -------- SHOP SCREEN --------
+let activeShopTab = 'themes';
+function renderShopScreen(tab){
+  activeShopTab = tab;
+  document.getElementById('shopGemCount').textContent = getGems();
+  const tabsEl = document.getElementById('shopTabs');
+  tabsEl.innerHTML = '';
+  const tabs = [{id:'themes',label:'🎨 Temalar'},{id:'skins',label:'🏹 Ok Skin'},{id:'boosts',label:'⚡ Güçlendirme'}];
+  tabs.forEach(t=>{
+    const btn=document.createElement('button');
+    btn.className='shop-tab'+(t.id===tab?' active':'');
+    btn.textContent=t.label;
+    btn.addEventListener('click',()=>{Sound.click();renderShopScreen(t.id);});
+    tabsEl.appendChild(btn);
+  });
+  const gridEl2 = document.getElementById('shopGrid');
+  gridEl2.innerHTML='';
+  const owned=getOwned();
+  const activeTheme=getActiveTheme();
+  const activeSkin=getActiveSkin();
+  const items=SHOP_ITEMS[tab];
+  items.forEach(item=>{
+    const isOwned=owned.has(item.id)||item.price===0;
+    const isActive=(tab==='themes'&&activeTheme===item.id)||(tab==='skins'&&activeSkin===item.id);
+    const el=document.createElement('div');
+    el.className='shop-item'+(isActive?' active-item':isOwned?' owned':'');
+
+    let previewHtml='';
+    if(tab==='themes'&&item.preview){
+      previewHtml=`<div class="theme-preview" style="background:${item.preview[0]}">
+        <div style="width:22px;height:22px;border-radius:6px;background:${item.preview[1]}"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--c-teal);opacity:.8"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--c-violet);opacity:.8"></div>
+      </div>`;
+    }
+
+    el.innerHTML=`
+      ${isActive?'<div class="active-badge">AKTİF</div>':isOwned?'<div class="owned-badge">SAHİP</div>':''}
+      <span class="item-icon">${item.icon}</span>
+      ${previewHtml}
+      <div class="item-name">${item.name}</div>
+      <div class="item-desc">${item.desc}</div>
+      <div class="item-price${item.price===0?' free':''}">💎 ${item.price===0?'Ücretsiz':item.price+' RP'}</div>
+    `;
+
+    el.addEventListener('click',()=>{
+      Sound.click();
+      if(isActive)return;
+      if(isOwned||item.price===0){
+        // activate
+        if(tab==='themes'){setActiveTheme(item.id);}
+        else if(tab==='skins'){setActiveSkin(item.id);}
+        else if(tab==='boosts'){
+          // consumable
+          if(!spendGems(item.price)){showToast('Yeterli Renk Parası yok!');return;}
+          if(item.id==='extra_heart'){}// applied in game
+          if(item.id==='coin_magnet')addCoinMagnet(5);
+          if(item.id==='hint_pack')addHintPack(5);
+          Sound.purchase();
+          showToast('Satın alındı! ✅');
+        }
+        renderShopScreen(tab);
+      } else {
+        // buy
+        if(getGems()<item.price){showToast('Yeterli Renk Parası yok! 💎');return;}
+        if(spendGems(item.price)){
+          addOwned(item.id);
+          if(tab==='themes')setActiveTheme(item.id);
+          else if(tab==='skins')setActiveSkin(item.id);
+          Sound.purchase();
+          showToast(`${item.name} satın alındı! 🎉`);
+          renderShopScreen(tab);
+        }
+      }
+    });
+    gridEl2.appendChild(el);
+  });
+}
+
+// Simple toast
+function showToast(msg){
+  let t=document.getElementById('_toast');
+  if(!t){t=document.createElement('div');t.id='_toast';Object.assign(t.style,{position:'fixed',bottom:'80px',left:'50%',transform:'translateX(-50%)',background:'var(--panel)',border:'1px solid var(--line)',borderRadius:'12px',padding:'10px 18px',fontSize:'13px',fontWeight:'600',zIndex:'999',transition:'opacity .3s',whiteSpace:'nowrap'});document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity='1';
+  clearTimeout(t._timer);t._timer=setTimeout(()=>{t.style.opacity='0';},2000);
+}
+
+// -------- MAP SCREEN --------
+let activeMapId='start';
+function renderMapScreen(mapId){
+  activeMapId=mapId;
+  const tabsEl=document.getElementById('mapTabs');
+  tabsEl.innerHTML='';
+  MAPS.forEach(m=>{
+    const btn=document.createElement('button');
+    btn.className='map-tab'+(m.id===mapId?' active':'');
+    btn.textContent=m.name;
+    const isLocked=m.id==='desert'&&getDoneSet().size<40;
+    btn.disabled=isLocked;
+    if(isLocked)btn.textContent+=' 🔒';
+    btn.addEventListener('click',()=>{Sound.click();renderMapScreen(m.id);});
+    tabsEl.appendChild(btn);
+  });
+  const map=MAPS.find(m=>m.id===mapId);
+  const done=getDoneSet();const coins=getCoinSet();const total=getTotalCoins();
+  document.getElementById('mapCoinCount').textContent=total;
+  document.getElementById('mapCoinInfo').textContent=`${total} coin`;
+  const gridEl2=document.getElementById('mapGrid');
+  gridEl2.innerHTML='';
+  for(let lv=map.levelStart;lv<=map.levelEnd;lv++){
+    const cell=document.createElement('div');
+    const isDone=done.has(lv);const hasCoin=coins.has(lv);
+    const isUnlocked=lv===map.levelStart||coins.has(lv-1)||done.has(lv-1);
+    cell.className='map-cell'+(isDone?' done':'')+(isUnlocked?'':' locked')+(hasCoin?' has-coin':'');
+    const num=document.createElement('div');num.className='lvl-num';num.textContent=lv;
+    const coin=document.createElement('div');coin.className='coin-dot';
+    if(!isUnlocked){const lock=document.createElement('div');lock.className='lock-icon';lock.textContent='🔒';cell.appendChild(lock);}
+    cell.appendChild(num);cell.appendChild(coin);
+    if(isUnlocked){cell.addEventListener('click',()=>{Sound.click();showGame(lv);});}
+    gridEl2.appendChild(cell);
+  }
+}
+
+// -------- START LEVEL --------
+function startLevel(level){
+  levelsSinceAd++;
+  const gen=generateLevel(level);
+  state.level=level;state.map=gen.map;state.size=gen.size;
+  state.cells=gen.cells;state.gates=gen.gates;state.palette=gen.palette;
+  let baseHearts=heartsForLIM(level-gen.map.levelStart+1);
+  // extra_heart boost: check owned and consumable
+  state.hearts=baseHearts;state.maxHearts=baseHearts;
+  state.busy=false;state.solved=false;
+  state.coin=gen.coin;
+  state.coinCollected=getCoinSet().has(level);
+  // coin magnet auto-collect
+  if(!state.coinCollected && getCoinMagnet()>0){
+    useCoinMagnet();
+    state.coinCollected=true;
+    markCoinCollected(level);
+  }
+  state.recolorUsed=false;state.greenUsesLeft=2;
+  closeColorPicker();
+  applyTheme(getActiveTheme());
+  render();
+  // Show rewarded ad option on game screen (in footer area as optional button)
+  renderRewardedAdBtn();
+}
+
+function renderRewardedAdBtn(){
+  // Add a small "Watch ad for +3 coins" button to footer if not already
+  let existing = document.getElementById('rewardAdBtn');
+  if(existing) existing.remove();
+  // Show only sometimes (not every level — every 3 levels)
+  if(state.level % 3 !== 0) return;
+  const footer = document.querySelector('footer');
+  const btn = document.createElement('div');
+  btn.id='rewardAdBtn';
+  btn.className='btn';
+  btn.style.background='rgba(255,215,0,.08)';
+  btn.style.borderColor='rgba(255,215,0,.3)';
+  btn.style.color='var(--coin)';
+  btn.style.fontSize='12px';
+  btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>+3 Coin`;
+  btn.addEventListener('click',()=>{
+    Sound.click();
+    Ads.showRewarded((rewarded)=>{
+      if(rewarded){
+        lsSet(SK.coins, getTotalCoins()+3);
+        coinHdrNum.textContent=getTotalCoins();
+        document.getElementById('menuCoinCount').textContent=getTotalCoins();
+        Sound.coin();
+        showToast('⭐ +3 Coin kazandın!');
+        btn.remove();
+      }
+    });
+  });
+  footer.appendChild(btn);
+}
+
+// -------- RENDER --------
+function render(){
+  levelNumEl.textContent=state.level;
+  mapNameTag.textContent=' · '+state.map.name;
+  coinHdrNum.textContent=getTotalCoins();
+  renderHearts();renderAbilityBar();renderBoard();
+}
+
+function renderHearts(){
+  heartsEl.innerHTML='';
+  for(let i=0;i<state.maxHearts;i++){
+    const d=document.createElement('div');d.className='heart';
+    d.innerHTML=`<svg viewBox="0 0 24 24" fill="${i<state.hearts?'#FF4D6D':'#2E3650'}"><path d="M12 21s-7.5-4.6-9.6-9.1C1.3 9.1 2.7 6 5.7 6c1.7 0 3 .9 3.8 2.1C10.3 6.9 11.6 6 13.3 6c3 0 4.4 3.1 3.3 5.9C18.5 16.4 12 21 12 21z"/></svg>`;
+    heartsEl.appendChild(d);
+  }
+}
+
+function renderAbilityBar(){
+  const map=state.map;
+  const hasGreen=map.colors.includes('green');
+  const hasNavy=map.colors.includes('navy');
+  const hasViolet=map.colors.includes('violet');
+  let bars=[];
+  if(hasViolet) bars.push({color:'violet',label:'Mor → Renk değiştir',count:'1x',used:state.recolorUsed});
+  if(hasGreen){
+    const pips=Array.from({length:2},(_,i)=>`<div class="green-pip${i>=state.greenUsesLeft?' used':''}"></div>`).join('');
+    bars.push({color:'green',label:'Yeşil → Engeli sil',customRight:`<div class="green-bar">${pips}</div>`});
+  }
+  if(hasNavy) bars.push({color:'navy',label:'Lacivert → Sarıya dön',count:'1x',used:state.recolorUsed});
+  if(bars.length===0){abilityBar.style.display='none';return;}
+  abilityBar.style.display='flex';abilityBar.innerHTML='';
+  for(const b of bars){
+    const p=document.createElement('div');
+    p.className='ability-pill'+(b.used?'':' active');
+    const dot=`<div class="ab-dot" style="background:${COLOR_HEX[b.color]}"></div>`;
+    const right=b.customRight||`<span class="ab-count">${b.count}</span>`;
+    p.innerHTML=`${dot}<span>${b.label}</span>${right}`;
+    abilityBar.appendChild(p);
+  }
+}
+
+function renderBoard(){
+  const size=state.size;
+  gridEl.style.gridTemplateColumns=`repeat(${size},1fr)`;
+  gridEl.style.gridTemplateRows=`repeat(${size},1fr)`;
+  gridEl.innerHTML='';
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+    const c=document.createElement('div');
+    c.className='cell'+(state.cells[y][x]?'':' empty');
+    gridEl.appendChild(c);
+  }
+  requestAnimationFrame(()=>positionGatesAndArrows());
+}
+
+function getSkinClass(){
+  const s=getActiveSkin();
+  if(s==='default')return '';
+  return `skin-${s}`;
+}
+
+function positionGatesAndArrows(){
+  const size=state.size;
+  const rect=gridEl.getBoundingClientRect();
+  if(rect.width===0)return;
+  const cw=rect.width/size,ch=rect.height/size,gap=4;
+  gridEl.querySelectorAll('.gate,.arrow,.grid-coin,.color-picker').forEach(e=>e.remove());
+
+  // gates
+  for(const key in state.gates){
+    const[ds,es]=key.split('-');const dir=+ds,ei=+es;
+    const colors=[...state.gates[key]];
+    colors.forEach((color,ci)=>{
+      const g=document.createElement('div');g.className='gate';g.dataset.gateKey=key;g.dataset.gateColor=color;
+      const th=6,off=ci*(th+2);
+      if(dir===0){g.style.left=ei*cw+cw*.18+'px';g.style.width=cw*.64+'px';g.style.top=(-6-off)+'px';g.style.height=th+'px';}
+      else if(dir===2){g.style.left=ei*cw+cw*.18+'px';g.style.width=cw*.64+'px';g.style.bottom=(-6-off)+'px';g.style.height=th+'px';}
+      else if(dir===3){g.style.top=ei*ch+ch*.18+'px';g.style.height=ch*.64+'px';g.style.left=(-6-off)+'px';g.style.width=th+'px';}
+      else{g.style.top=ei*ch+ch*.18+'px';g.style.height=ch*.64+'px';g.style.right=(-6-off)+'px';g.style.width=th+'px';}
+      g.style.background=COLOR_HEX[color];
+      gridEl.appendChild(g);
+    });
+  }
+
+  // coin
+  if(state.coin&&!state.coinCollected){
+    const{x,y}=state.coin;
+    const cc=document.createElement('div');cc.className='grid-coin';cc.id='gridCoin';
+    cc.style.left=(x*cw+cw/2)+'px';cc.style.top=(y*ch+ch/2)+'px';
+    cc.style.width=Math.min(cw,ch)*.4+'px';cc.style.height=Math.min(cw,ch)*.4+'px';
+    cc.style.transform='translate(-50%,-50%)';
+    cc.innerHTML=`<svg viewBox="0 0 24 24" width="100%" height="100%"><circle cx="12" cy="12" r="10" fill="#FFD700" stroke="#FFA500" stroke-width="1.5"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="bold" fill="#8B4513">⭐</text></svg>`;
+    gridEl.appendChild(cc);
+  }
+
+  const skinClass=getSkinClass();
+  // arrows
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+    const cell=state.cells[y][x]; if(!cell)continue;
+    const el=document.createElement('div');
+    el.className=`arrow col-${cell.color}${skinClass?' '+skinClass:''}`;
+    el.dataset.x=x;el.dataset.y=y;
+    el.style.left=x*cw+'px';el.style.top=y*ch+'px';
+    el.style.width=(cw-gap)+'px';el.style.height=(ch-gap)+'px';
+    el.innerHTML=arrowSvg(cell.dir);
+    el.addEventListener('click',onArrowClick);
+
+    if(cell.color==='violet'&&state.map.id==='start'){
+      const badge=document.createElement('div');
+      badge.className='special-badge'+(state.recolorUsed?' used':'');
+      badge.style.background='var(--bg)';badge.style.border='2px solid var(--c-violet)';
+      badge.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="${state.recolorUsed?'#555':'var(--c-violet)'}" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>`;
+      badge.addEventListener('click',e=>{e.stopPropagation();Sound.click();openVioletPicker(x,y);});
+      el.appendChild(badge);
+    }
+    if(cell.color==='navy'&&state.map.id==='desert'){
+      const badge=document.createElement('div');
+      badge.className='special-badge'+(state.recolorUsed?' used':'');
+      badge.style.background='var(--bg)';badge.style.border='2px solid var(--c-navy)';
+      badge.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="${state.recolorUsed?'#555':'var(--c-navy)'}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      badge.addEventListener('click',e=>{e.stopPropagation();Sound.click();applyNavyRecolor(x,y);});
+      el.appendChild(badge);
+    }
+    gridEl.appendChild(el);
+  }
+}
+
+function arrowSvg(dir){
+  const rot=[0,90,180,270][dir];
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rot}deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
+}
+
+// -------- RECOLOR: VIOLET --------
+let activePicker=null;
+function closeColorPicker(){
+  if(activePicker&&activePicker.parentNode)activePicker.parentNode.removeChild(activePicker);
+  activePicker=null;
+}
+function openVioletPicker(x,y){
+  if(state.busy||state.solved||state.recolorUsed)return;
+  const cell=state.cells[y][x];if(!cell||cell.color!=='violet')return;
+  closeColorPicker();
+  const options=state.palette.filter(c=>c!=='violet');
+  const picker=document.createElement('div');picker.className='color-picker';
+  const arrowEl=gridEl.querySelector(`.arrow[data-x="${x}"][data-y="${y}"]`);
+  const gr=gridEl.getBoundingClientRect();
+  const size=state.size,cw=gr.width/size,ch=gr.height/size;
+  let left=x*cw,top=y*ch-50;
+  if(top<0)top=y*ch+ch+4;
+  left=Math.max(0,Math.min(left,gr.width-options.length*42-16));
+  picker.style.left=left+'px';picker.style.top=top+'px';
+  options.forEach(color=>{
+    const sw=document.createElement('div');sw.className='swatch';sw.style.background=COLOR_HEX[color];
+    sw.addEventListener('click',e=>{e.stopPropagation();applyVioletRecolor(x,y,color);});
+    picker.appendChild(sw);
+  });
+  gridEl.appendChild(picker);activePicker=picker;
+}
+function applyVioletRecolor(x,y,newColor){
+  const cell=state.cells[y][x];if(!cell)return;
+  const oldColor=cell.color;cell.color=newColor;state.recolorUsed=true;
+  const v=DIRS[cell.dir];let cx=x,cy=y;
+  while(inBounds(cx+v.dx,cy+v.dy,state.size)){cx+=v.dx;cy+=v.dy;}
+  const ei=(cell.dir===0||cell.dir===2)?cx:cy;
+  const gk=`${cell.dir}-${ei}`;
+  if(state.gates[gk]){state.gates[gk].delete(oldColor);state.gates[gk].add(newColor);}
+  closeColorPicker();positionGatesAndArrows();renderAbilityBar();
+}
+
+// -------- RECOLOR: NAVY --------
+function applyNavyRecolor(x,y){
+  if(state.busy||state.solved||state.recolorUsed)return;
+  const cell=state.cells[y][x];if(!cell||cell.color!=='navy')return;
+  const v=DIRS[cell.dir];let cx=x,cy=y;
+  while(inBounds(cx+v.dx,cy+v.dy,state.size)){cx+=v.dx;cy+=v.dy;}
+  const ei=(cell.dir===0||cell.dir===2)?cx:cy;
+  const gk=`${cell.dir}-${ei}`;
+  if(state.gates[gk]){state.gates[gk].delete('navy');state.gates[gk].add('yellow');}
+  cell.color='yellow';state.recolorUsed=true;
+  positionGatesAndArrows();renderAbilityBar();
+}
+
+// -------- MOVE --------
+function onArrowClick(){
+  if(state.busy||state.solved)return;
+  Sound.arrowSlide();
+  attemptMove(+this.dataset.x,+this.dataset.y);
+}
+
+function attemptMove(x,y){
+  const cell=state.cells[y][x];if(!cell)return;
+  const size=state.size,v=DIRS[cell.dir];
+  let cx=x,cy=y,blocked=null;
+  const pathCells=[];
+  while(true){
+    cx+=v.dx;cy+=v.dy;
+    if(!inBounds(cx,cy,size))break;
+    if(state.cells[cy][cx]){blocked={x:cx,y:cy};break;}
+    pathCells.push({x:cx,y:cy});
+  }
+  state.busy=true;
+  const el=gridEl.querySelector(`.arrow[data-x="${x}"][data-y="${y}"]`);
+
+  if(blocked){
+    if(cell.color==='green'&&state.map.id==='desert'&&state.greenUsesLeft>0){
+      state.greenUsesLeft--;
+      const blockerEl=gridEl.querySelector(`.arrow[data-x="${blocked.x}"][data-y="${blocked.y}"]`);
+      if(blockerEl){blockerEl.classList.add('fading');setTimeout(()=>blockerEl.remove(),300);}
+      state.cells[blocked.y][blocked.x]=null;
+      state.busy=false;renderAbilityBar();
+      setTimeout(()=>attemptMove(x,y),320);
+      return;
+    }
+    Sound.heartLose();
+    loseHeart();
+    if(el){el.classList.add('shake');setTimeout(()=>{el.classList.remove('shake');state.busy=false;},340);}
+    else state.busy=false;
+    return;
+  }
+
+  const allPathCells=[{x,y},...pathCells];
+  if(state.coin&&!state.coinCollected){
+    const hit=allPathCells.some(p=>p.x===state.coin.x&&p.y===state.coin.y);
+    if(hit)collectCoin();
+  }
+
+  const edgeIdx=(cell.dir===0||cell.dir===2)?cx-v.dx:cy-v.dy; // exit edge position... recompute:
+  let ex2=x,ey2=y;
+  while(inBounds(ex2+v.dx,ey2+v.dy,size)){ex2+=v.dx;ey2+=v.dy;}
+  const edgeIdx2=(cell.dir===0||cell.dir===2)?ex2:ey2;
+  const key2=`${cell.dir}-${edgeIdx2}`;
+  const allowed=state.gates[key2]?[...state.gates[key2]]:[];
+  const correct=allowed.includes(cell.color);
+
+  const rect=gridEl.getBoundingClientRect();
+  const cw=rect.width/size,ch=rect.height/size,gap=4;
+
+  if(el){
+    el.classList.add('sliding');
+    let tL=ex2*cw,tT=ey2*ch;
+    if(cell.dir===0)tT=-ch;
+    else if(cell.dir===2)tT=size*ch;
+    else if(cell.dir===3)tL=-cw;
+    else tL=size*cw;
+    el.style.left=tL+'px';el.style.top=tT+'px';
+    setTimeout(()=>el.classList.add('fading'),180);
+    setTimeout(()=>{
+      state.cells[y][x]=null;
+      if(el.parentNode)el.parentNode.removeChild(el);
+      if(!correct){Sound.heartLose();loseHeart(true);}
+      checkSolved();
+      state.busy=false;
+    },340);
+  } else {
+    state.cells[y][x]=null;
+    if(!correct){Sound.heartLose();loseHeart(true);}
+    checkSolved();
+    state.busy=false;
+  }
+}
+
+function collectCoin(){
+  state.coinCollected=true;
+  markCoinCollected(state.level);
+  coinHdrNum.textContent=getTotalCoins();
+  document.getElementById('menuCoinCount').textContent=getTotalCoins();
+  Sound.coin();
+  const cc=document.getElementById('gridCoin');
+  if(cc){cc.classList.add('collected');setTimeout(()=>cc.remove(),400);}
+}
+
+function loseHeart(silent){
+  state.hearts--;renderHearts();
+  boardFrame.style.boxShadow='0 0 0 3px var(--danger),0 8px 30px rgba(0,0,0,.35)';
+  setTimeout(()=>boardFrame.style.boxShadow='0 8px 30px rgba(0,0,0,.35)',220);
+  if(state.hearts<=0)setTimeout(()=>showFail(),silent?380:80);
+}
+
+function checkSolved(){
+  let rem=0;
+  for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++)if(state.cells[y][x])rem++;
+  if(rem===0&&state.hearts>0){
+    state.solved=true;
+    markLevelDone(state.level);
+    // Earn gems
+    addGems(50);
+    Sound.success();
+    showGemFloat(50, boardFrame);
+    setTimeout(()=>showSuccess(),200);
+  }
+}
+
+// -------- MODALS --------
+function showSuccess(){
+  ringAnim.className='ring-anim';
+  ringAnim.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+  modalTitle.textContent='Harika!';
+  coinRewardEl.style.display=state.coinCollected?'inline-flex':'none';
+  gemRewardEl.style.display='inline-flex';
+  modalText.textContent=`Seviye ${state.level} tamamlandı. 💎 Toplam: ${getGems()} Renk Parası`;
+  modalBtns.innerHTML='';
+  const next=state.level+1;
+  const btn=document.createElement('div');
+  btn.className='mbtn primary';btn.style.width='100%';
+  if(next>80){btn.textContent='Tüm Harita Bitti 🎉';}
+  else{btn.textContent='Sıradaki Seviye →';}
+  btn.addEventListener('click',()=>{
+    Sound.click();overlay.classList.remove('show');
+    saveLevel(next);
+    if(next>80)showMenu();
+    else showGame(next);
+  });
+  modalBtns.appendChild(btn);
+  const mapBtn2=document.createElement('div');
+  mapBtn2.className='mbtn secondary';mapBtn2.style.width='100%';mapBtn2.textContent='Haritaya Dön';
+  mapBtn2.addEventListener('click',()=>{Sound.click();overlay.classList.remove('show');showMapScreen(state.map.id);});
+  modalBtns.appendChild(mapBtn2);
+  overlay.classList.add('show');
+}
+
+function showFail(){
+  Sound.fail();
+  ringAnim.className='ring-anim fail';
+  ringAnim.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+  modalTitle.textContent='Tekrar Dene';coinRewardEl.style.display='none';gemRewardEl.style.display='none';
+  modalText.textContent='Tüm canların bitti.';
+  modalBtns.innerHTML='';
+  const btn=document.createElement('div');btn.className='mbtn primary';btn.style.width='100%';btn.textContent='Yeniden Başla';
+  btn.addEventListener('click',()=>{Sound.click();overlay.classList.remove('show');startLevel(state.level);});
+  modalBtns.appendChild(btn);
+  // Revive with ad
+  const reviveBtn=document.createElement('div');reviveBtn.className='mbtn secondary';reviveBtn.style.width='100%';reviveBtn.textContent='📺 Reklam İzle → Can Kazan';
+  reviveBtn.addEventListener('click',()=>{
+    Sound.click();overlay.classList.remove('show');
+    Ads.showRewarded((rewarded)=>{
+      if(rewarded){
+        state.hearts=1;state.busy=false;state.solved=false;
+        render();
+        showToast('❤️ 1 Can kazandın!');
+      } else {
+        startLevel(state.level);
+      }
+    });
+  });
+  modalBtns.appendChild(reviveBtn);
+  overlay.classList.add('show');
+}
+
+// -------- HINT --------
+function showHint(){
+  if(state.busy||state.solved)return;
+  Sound.hint();
+  const size=state.size;
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+    const cell=state.cells[y][x];if(!cell)continue;
+    const v=DIRS[cell.dir];let cx=x,cy=y,bl=false;
+    while(true){cx+=v.dx;cy+=v.dy;if(!inBounds(cx,cy,size))break;if(state.cells[cy][cx]){bl=true;break;}}
+    if(bl)continue;
+    let ex2=x,ey2=y;
+    while(inBounds(ex2+v.dx,ey2+v.dy,size)){ex2+=v.dx;ey2+=v.dy;}
+    const edgeIdx2=(cell.dir===0||cell.dir===2)?ex2:ey2;
+    const k=`${cell.dir}-${edgeIdx2}`;
+    const allowed=state.gates[k]?[...state.gates[k]]:[];
+    if(allowed.includes(cell.color)){
+      const el=gridEl.querySelector(`.arrow[data-x="${x}"][data-y="${y}"]`);
+      if(el){el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),900);}
+      return;
+    }
+  }
+  const arrows=gridEl.querySelectorAll('.arrow');
+  if(arrows.length){const el=arrows[Math.floor(Math.random()*arrows.length)];el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),900);}
+}
+
+document.addEventListener('click',e=>{
+  if(activePicker&&!activePicker.contains(e.target)&&!e.target.closest('.special-badge'))closeColorPicker();
+});
+window.addEventListener('resize',()=>positionGatesAndArrows());
+
+// -------- TUTORIAL --------
+const TUT_STEPS=[
+  {
+    title:'Merhaba! 👋',
+    visual:`<div class="tv-col"><div class="tv-arrow col-teal">${arrowSvg(1)}</div><div class="tv-gate" style="background:var(--c-teal);width:60px"></div></div>`,
+    text:'Her ok bir renge sahip. Oku tıkla — ok kendi yönüne kayar ve <b>kapıdan</b> çıkar. Renk eşleşmeli!'
+  },
+  {
+    title:'Coin & Renk Parası ⭐💎',
+    visual:`<div class="tv-col"><div class="tv-arrow col-orange">${arrowSvg(1)}</div></div><div class="tv-coin">⭐</div>`,
+    text:'Coin topla, her seviyeyi bitirince <b>50 Renk Parası</b> kazan. Market\'ten yeni temalar ve skinler al!'
+  },
+  {
+    title:'Çarpışma = Can Kaybı 💔',
+    visual:`<div class="tv-col"><div class="tv-arrow col-orange">${arrowSvg(1)}</div></div><div class="tv-col"><div class="tv-arrow col-teal">${arrowSvg(3)}</div></div>`,
+    text:'Okun yolu bloke ise çarpışır ve <b>can kaybedersin</b>. Sıralamayı iyi planla.'
+  },
+  {
+    title:'Mor Ok → Renk Değiştir 🔮',
+    visual:`<div class="tv-col" style="position:relative"><div class="tv-arrow col-violet" style="position:relative">${arrowSvg(0)}<div class="tv-badge"><svg viewBox="0 0 24 24" fill="none" stroke="var(--c-violet)" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg></div></div></div>`,
+    text:'Mor okun rozetine tıkla, rengi değiştir (1 kez). <b>Kapı da güncellenir!</b>'
+  },
+  {
+    title:'Market 🛒',
+    visual:`<div style="font-size:40px">🛒</div>`,
+    text:'Renk Parası ile <b>Market\'ten</b> yeni arka planlar, ok görünümleri ve güçlendirmeler al!'
+  },
+  {
+    title:'Hazırsın! 🎉',
+    visual:`<div style="font-size:48px">🚀</div>`,
+    text:'40 seviye "Başlangıç Renkler", sonra "Çöl Yolu" açılır. Coinleri topla!'
+  }
+];
+let tutStep=0,tutCallback=null;
+function arrowSvg(dir){
+  const rot=[0,90,180,270][dir];
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rot}deg)"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
+}
+function showTutorial(cb){tutCallback=cb;tutStep=0;tutOverlay.classList.add('show');renderTutStep();}
+function renderTutStep(){
+  const s=TUT_STEPS[tutStep];
+  document.getElementById('tutTitle').textContent=s.title;
+  document.getElementById('tutVisual').innerHTML=s.visual;
+  document.getElementById('tutText').innerHTML=s.text;
+  const dots=document.getElementById('tutDots');
+  dots.innerHTML=TUT_STEPS.map((_,i)=>`<div class="tut-dot${i===tutStep?' active':''}"></div>`).join('');
+  const prev=document.getElementById('tutPrev');
+  const next=document.getElementById('tutNext');
+  prev.style.display=tutStep===0?'none':'flex';
+  next.textContent=tutStep===TUT_STEPS.length-1?'Başla!':'İleri';
+}
+document.getElementById('tutPrev').addEventListener('click',()=>{Sound.click();if(tutStep>0){tutStep--;renderTutStep();}});
+document.getElementById('tutNext').addEventListener('click',()=>{
+  Sound.click();
+  if(tutStep<TUT_STEPS.length-1){tutStep++;renderTutStep();}
+  else{setTutDone();tutOverlay.classList.remove('show');if(tutCallback)tutCallback();}
+});
+document.getElementById('tutSkip').addEventListener('click',()=>{Sound.click();setTutDone();tutOverlay.classList.remove('show');if(tutCallback)tutCallback();});
+
+// -------- INIT --------
+applyTheme(getActiveTheme());
+showMenu();
+// Start music after first interaction
+document.body.addEventListener('pointerdown',()=>{
+  if(Sound.musicEnabled)Sound.startMusic();
+},{once:true});
+</script>
+</body>
+</html>
